@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaBriefcase } from "react-icons/fa";
 
 const CompaniesBar = ({ setDescriptionJob }) => {
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -15,68 +16,52 @@ const CompaniesBar = ({ setDescriptionJob }) => {
     },
   ];
 
-  const ITEM_HEIGHT = 80; // Increased height for better spacing
+  // Positions → 0% and 50% (your requirement)
+  const positions = ["0%", "50%"];
 
   return (
-    <div className="relative flex w-full lg:w-[320px]">
+    <div className="relative flex w-full lg:w-[360px] min-h-[300px]">
       {/* Timeline */}
-      <div className="relative flex flex-col items-center w-10">
-        {/* Static vertical line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-[1px] -translate-x-1/2 bg-gray-700/40" />
+      <div className="relative w-10 flex justify-center">
+        {/* Base line */}
+        <div className="absolute top-0 bottom-0 w-[2px] bg-gray-700/40" />
 
-        {/* Animated active indicator */}
+        {/* Animated progress line */}
         <motion.div
-          animate={{ y: activeIndex * ITEM_HEIGHT + 12 }}
-          transition={{
-            type: "spring",
-            stiffness: 280,
-            damping: 30,
-          }}
-          className="absolute left-1/2 -translate-x-1/2 z-10"
-        >
-          {/* Glowing dot with pulse animation */}
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="relative"
-          >
-            {/* Outer glow */}
-            <div className="absolute inset-0 h-5 w-5 -translate-x-1/2 rounded-full bg-[rgb(49,130,206)]/40 blur-lg" />
-            {/* Middle glow */}
-            <div className="absolute inset-0 h-4 w-4 -translate-x-1/2 translate-y-[2px] rounded-full bg-[rgb(49,130,206)]/60 blur-md" />
-            {/* Main dot */}
-            <div className="relative h-3.5 w-3.5 -translate-x-1/2 translate-y-[3px] rounded-full bg-[rgb(49,130,206)] shadow-[0_0_20px_rgba(49,130,206,0.8),0_0_40px_rgba(49,130,206,0.4)]" />
-            {/* Inner shine */}
-            <div className="absolute top-[4px] left-[1px] h-1.5 w-1.5 rounded-full bg-white/70" />
-          </motion.div>
-        </motion.div>
+          animate={{ height: activeIndex === 0 ? "20%" : "60%" }}
+          transition={{ duration: 0.5 }}
+          className="absolute top-0 w-[2px] bg-blue-500"
+        />
 
-        {/* Static dots for inactive items */}
-        {companies.map((_, index) => (
-          <div
-            key={index}
-            className="absolute left-1/2 -translate-x-1/2"
-            style={{ top: `${index * ITEM_HEIGHT + 12}px` }}
-          >
-            {index !== activeIndex && (
+        {/* Timeline dots */}
+        {companies.map((_, index) => {
+          const isActive = index === activeIndex;
+
+          return (
+            <div
+              key={index}
+              className="absolute left-1/2 -translate-x-1/2"
+              style={{ top: positions[index] }}
+            >
               <motion.div
-                initial={{ scale: 0.8, opacity: 0.2 }}
-                animate={{ scale: 1, opacity: 0.4 }}
-                className="h-2 w-2 -translate-x-1/2 translate-y-[3px] rounded-full bg-gray-600 border border-gray-500/50"
+                animate={{
+                  scale: isActive ? 1.2 : 1,
+                  opacity: isActive ? 1 : 0.4,
+                }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className={`h-4 w-4 rounded-full border-2 ${
+                  isActive
+                    ? "bg-blue-500 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.7)]"
+                    : "bg-background border-gray-500"
+                }`}
               />
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
 
-      {/* Company Names */}
-      <div className="flex flex-col gap-3 flex-1">
+      {/* Company Cards */}
+      <div className="relative flex-1">
         {companies.map((company, index) => {
           const isActive = index === activeIndex;
 
@@ -87,37 +72,39 @@ const CompaniesBar = ({ setDescriptionJob }) => {
                 setActiveIndex(index);
                 setDescriptionJob(company.job);
               }}
-              initial={false}
-              whileHover={{ x: isActive ? 6 : 3 }}
-              animate={{
-                opacity: isActive ? 1 : 0.4,
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 30,
-              }}
-              style={{ height: `${ITEM_HEIGHT}px` }}
-              className={`relative flex items-center text-left font-mono text-base lg:text-[16px] transition-all duration-300 px-4 rounded-lg
+              whileHover={{ x: 6 }}
+              className={`absolute w-full max-w-[300px] rounded-xl px-5 py-4 text-left transition-all
                 ${
                   isActive
-                    ? "text-[rgb(49,130,206)] font-medium"
-                    : "text-gray-500 hover:text-gray-400"
+                    ? "bg-blue-500/10 border border-blue-500/40"
+                    : "bg-white/5 border border-white/10 hover:bg-white/10"
                 }`}
+              style={{ top: positions[index] }}
             >
-              {/* Active background with border */}
-              {isActive && (
-                <motion.div
-                  layoutId="activeBackground"
-                  className="absolute inset-0 bg-[rgb(49,130,206)]/5 rounded-lg border-l-[3px] border-[rgb(49,130,206)]"
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                  }}
+              {/* Step number + icon */}
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-mono text-blue-400">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <FaBriefcase
+                  className={`text-sm ${
+                    isActive ? "text-blue-400" : "text-gray-400"
+                  }`}
                 />
-              )}
-              <span className="relative z-10">{company.name}</span>
+              </div>
+
+              <h4
+                className={`mt-2 text-lg font-semibold ${
+                  isActive ? "text-blue-400" : "text-gray-300"
+                }`}
+              >
+                {company.name}
+              </h4>
+
+              <p className="text-sm text-gray-400">
+                Click to view experience
+              </p>
             </motion.button>
           );
         })}
