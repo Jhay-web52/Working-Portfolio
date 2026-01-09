@@ -1,159 +1,153 @@
 "use client";
 
 import { TypeAnimation } from "react-type-animation";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import {
-  Link as ScrollLink,
-  Button,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import linkdinimg from "@/assets/linkdinimg.jpeg";
+import { FaDownload, FaArrowRight } from "react-icons/fa";
+
+/* ------------------ FLOATING ANIMATION ------------------ */
+const floating = {
+  animate: { y: [0, -14, 0] },
+  transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+};
 
 const HeroSection = () => {
   const refContent = useRef(null);
-  const inViewContent = useInView(refContent, { once: true });
+  const inView = useInView(refContent, { once: true });
+
+  /* ------------------ MOUSE GLOW ------------------ */
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 100, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 100, damping: 20 });
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth > 768);
+
+    const move = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
 
   return (
     <section
-      className="h-full w-full pb-8 pt-16 sm:px-6 sm:pb-10 md:pt-24"
       id="intro"
+      className="relative min-h-screen w-full overflow-hidden px-4 pt-20 sm:px-6"
     >
-      <div className="flex flex-col items-center justify-center gap-4 lg:flex-row lg:items-start">
-        {/* intro section */}
+      {/* 🌊 Animated Gradient Background */}
+      <motion.div
+        className="absolute inset-0 -z-20"
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(59,130,246,0.15), rgba(147,51,234,0.15), rgba(59,130,246,0.15))",
+          backgroundSize: "300% 300%",
+        }}
+      />
+
+      {/* 🎯 Mouse Follow Glow (Desktop Only) */}
+      {isDesktop && (
+        <motion.div
+          className="pointer-events-none fixed top-0 left-0 z-0 h-72 w-72 rounded-full bg-blue-500/20 blur-[120px]"
+          style={{
+            translateX: smoothX,
+            translateY: smoothY,
+          }}
+        />
+      )}
+
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-10 lg:flex-row">
+        {/* ---------------- LEFT CONTENT ---------------- */}
         <motion.div
           ref={refContent}
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
-          animate={
-            inViewContent
-              ? { opacity: 1, y: 0, scale: 1 }
-              : { opacity: 0, y: 20, scale: 0.9 }
-          }
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="w-full flex-1"
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="flex-1"
         >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.1 }}
-            className="mb-4 text-4xl font-[700] text-white drop-shadow-[0_0_10px_rgba(49,130,206,0.8)] drop-shadow-[0_0_20px_rgba(49,130,206,0.6)] md:text-5xl 
-             lg:leading-normal 
-             xl:text-6xl"
-          >
-            Hi, I&apos;m{" "}
-            <span className="text-heading drop-shadow-[0_0_10px_rgba(49,130,206,0.8)]">
-              Prabhulal
-            </span>{" "}
-            a{" "}
-            <span className="text-heading drop-shadow-[0_0_10px_rgba(49,130,206,0.8)]">
-              passionate
-            </span>{" "}
-            Front-End Developer.
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-          >
-            <TypeAnimation
-              // preRenderFirstString={true}
-              sequence={[
-                500,
-                "I develop interactive UI using React.js and Next.js.",
-                1000,
-                "I'm a Front-End developer.",
-                1000,
-                "Transforming visions into seamless user experiences.",
-                1000,
-                "Bringing ideas to life with creativity and code.",
-                500,
-              ]}
-              speed={50}
-              className="text-sm font-medium md:text-xl xl:text-2xl"
-              wrapper="span"
-              cursor={true}
-              repeat={Infinity}
-            />
-          </motion.div>
+          <h1 className="mb-4 text-4xl font-extrabold text-white md:text-5xl xl:text-6xl">
+            I&apos;m <span className="text-heading drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]">Prabhulal</span>, a{' '}
+            <span className="text-heading drop-shadow-[0_0_20px_rgba(59,130,246,0.9)]">passionate</span> frontend developer
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
-            className="mb-6 mt-3 text-base text-textPara sm:text-lg lg:text-xl"
-          >
-            Stick around to see some of my work.
-          </motion.p>
+          <TypeAnimation
+            sequence={[
+              "Building premium UI with React & Next.js",
+              1200,
+              "Creating smooth, scalable frontend experiences",
+              1200,
+              "Turning ideas into production-ready code",
+              1200,
+            ]}
+            speed={45}
+            repeat={Infinity}
+            className="text-base text-textPara md:text-xl"
+          />
 
-          <div className="flex flex-col items-center gap-8 sm:flex-row sm:gap-4 ">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}
-            >
+          <p className="mt-4 max-w-xl text-textPara">
+            I design and build modern, high-performance web interfaces focused on clarity, motion and user experience.
+          </p>
+
+          {/* BUTTONS */}
+          <div className="mt-8 flex flex-col gap-5 sm:flex-row">
+            {/* Hire Me */}
+            <motion.div variants={floating} animate="animate" className="flex items-center">
               <ScrollLink
                 to="contact"
-                smooth={true}
-                duration={1000}
-                className="duration-400 w-full cursor-pointer rounded-full bg-white px-6 py-3 text-center text-lg font-bold text-darkHover transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-gray-300 sm:w-fit"
+                smooth
+                duration={900}
+                className="inline-flex cursor-pointer items-center gap-3 rounded-full bg-white px-8 py-3 font-bold text-darkHover shadow-[0_0_35px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-1"
               >
                 Hire Me
+                <motion.span
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                >
+                  <FaArrowRight />
+                </motion.span>
               </ScrollLink>
             </motion.div>
 
-            {/* CV Drive Link */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
+            {/* 💎 Download CV */}
+            <motion.a
+              href="https://drive.google.com/file/d/1wRgaFmytWUjihBWk56ehBRhDMdr4abE3/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-center gap-3 rounded-full border-2 border-white px-8 py-3 font-medium text-white transition-all hover:bg-white hover:text-darkHover"
             >
-              <a
-                href="https://drive.google.com/file/d/1wRgaFmytWUjihBWk56ehBRhDMdr4abE3/view?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="duration-400 w-full rounded-full border-2 border-white bg-transparent px-6 py-3 text-center text-lg font-medium text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover sm:w-fit"
+              <span>Download CV</span>
+              <motion.span
+                animate={{ y: [0, 4, 0] }}
+                transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
               >
-                Download CV
-              </a>
-            </motion.div>
+                <FaDownload />
+              </motion.span>
+            </motion.a>
           </div>
         </motion.div>
 
-        {/* Hero image section */}
-        <motion.div
-          ref={refContent}
-          initial={{
-            opacity: 0,
-            y: 20,
-            scale: 0.8,
-            filter: "blur(10px)",
-          }}
-          animate={
-            inViewContent
-              ? {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  filter: "blur(0px)",
-                }
-              : { opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }
-          }
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="relative mt-5 rounded-full lg:-mt-5"
-        >
-          <Image
-            width={400}
-            height={400}
-            src={linkdinimg}
-            alt="Karan"
-            priority={true}
-            className="size-[300px] rotate-2 cursor-pointer rounded-full object-cover transition-all duration-300 ease-in-out hover:scale-[1.02] sm:size-[380px]"
-          />
+        {/* ---------------- IMAGE ---------------- */}
+        <motion.div variants={floating} animate="animate" className="relative">
+          <motion.div whileHover={{ scale: 1.06, rotate: 2 }}>
+            <Image
+              src={linkdinimg}
+              alt="Prabhulal"
+              width={380}
+              height={380}
+              priority
+              className="relative rounded-full object-cover shadow-[0_0_45px_rgba(59,130,246,0.6)]"
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
