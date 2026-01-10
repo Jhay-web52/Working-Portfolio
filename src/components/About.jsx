@@ -77,19 +77,32 @@ const About = () => {
         >
           <p>
             I&apos;m{" "}
-            <span className="font-semibold text-heading"> Prabhulal Raghwani </span>
-            , a passionate Frontend Developer with hands-on experience in building modern, responsive web applications. Currently working as a Frontend Developer Trainee at LNV Digital, I specialize in developing and enhancing ERP modules while creating seamless user experiences using React.js, Next.js, and Tailwind CSS. <br /><br />
-            With expertise spanning HTML5, CSS3, JavaScript (ES6+), and modern frontend frameworks, I focus on converting designs into pixel-perfect, responsive interfaces. From building Netflix-inspired applications to creating product showcase websites and enterprise solutions, I thrive on delivering robust, scalable, and user-friendly solutions. My approach combines clean code practices with performance optimization, ensuring every project meets the highest standards of quality and usability.
+            <span className="font-semibold text-heading">
+              Prabhulal Raghwani
+            </span>
+            , a Frontend Developer with hands-on experience building modern,
+            responsive web applications. Currently working as a Frontend
+            Developer Trainee at LNV Digital, I specialize in developing
+            scalable UI components and ERP modules using{" "}
+            <span className="font-semibold text-heading">React.js</span>,{" "}
+            <span className="font-semibold text-heading">Next.js</span>,{" "}
+            <span className="font-semibold text-heading">Tailwind CSS</span>,{" "}
+            <span className="font-semibold text-heading">HTML5</span>,{" "}
+            <span className="font-semibold text-heading">CSS3</span>, and{" "}
+            <span className="font-semibold text-heading">
+              JavaScript (ES6+)
+            </span>
+            , with a strong focus on clean code, performance, and user
+            experience.
           </p>
+
           <div className="mt-6 w-full sm:mt-0">
             <div className="w-full">
               <h5 className="mt-4 text-xl font-bold text-textWhite">
                 Education
               </h5>
               <div className="">
-                <h5 className="text-lg font-medium">
-                  Mumbai University
-                </h5>
+                <h5 className="text-lg font-medium">Mumbai University</h5>
                 <div className=" flex w-full items-start gap-1 sm:gap-2">
                   <ArrowRight className={" h-5 w-4 flex-none"} />
                   <div
@@ -112,13 +125,13 @@ const About = () => {
               </h5>
               <div className="space-y-1.5">
                 <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className="h-5 w-4 flex-none text-blue-400 mt-0.5" />
+                  <ArrowRight className="mt-0.5 h-5 w-4 flex-none text-blue-400" />
                   <div className="text-sm text-gray-400">
-                    <a 
-                      href="https://www.coursera.org/account/accomplishments/professional-cert/CZ7WA8C5E4G2" 
+                    <a
+                      href="https://www.coursera.org/account/accomplishments/professional-cert/CZ7WA8C5E4G2"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-heading hover:underline transition-colors"
+                      className="font-bold text-heading transition-colors hover:underline"
                     >
                       Meta Front-End Developer{" "}
                     </a>
@@ -126,19 +139,20 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-start gap-1 sm:gap-2">
-                  <ArrowRight className="h-5 w-4 flex-none text-blue-400 mt-0.5" />
+                  <ArrowRight className="mt-0.5 h-5 w-4 flex-none text-blue-400" />
                   <div className="text-sm text-gray-400">
-                    <a 
-                      href="https://drive.google.com/file/d/1An7CK6iMx-pfUWmkBo7842PdzqtCTnWm/view?usp=sharing" 
+                    <a
+                      href="https://drive.google.com/file/d/1An7CK6iMx-pfUWmkBo7842PdzqtCTnWm/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-heading hover:underline transition-colors"
+                      className="font-bold text-heading transition-colors hover:underline"
                     >
                       Namaste React Course{" "}
                     </a>
-                    - Advanced React.js concepts and best practices from NamasteDev.com
+                    - Advanced React.js concepts and best practices from
+                    NamasteDev.com
                   </div>
-                  </div>
+                </div>
               </div>
             </div>
             <div className="mt-6 w-full">
@@ -150,7 +164,7 @@ const About = () => {
                   href="https://leetcode.com/u/PrabhulalRaghwani/"
                   target="_blank"
                   title="Leetcode"
-                  className="flex items-center gap-1 rounded-md bg-[#1d1d1d] px-3 py-2 text-sm font-medium text-orange-300 transition-all duration-200 ease-in-out hover:scale-[1.05]"
+                  className="flex items-center gap-1 rounded-md bg-[#1d1d1d] px-3 py-2 text-sm font-medium text-orange-500 transition-all duration-200 ease-in-out hover:scale-[1.05]"
                 >
                   <SiLeetcode className="size-6" /> Leetcode
                 </a>
@@ -158,15 +172,16 @@ const About = () => {
                   href="https://namastedev.com/prabhulal.raghwani410"
                   target="_blank"
                   title="NamasteDev"
-                  className="flex items-center gap-1 rounded-md bg-green-800 px-3 py-2 text-sm font-medium transition-all duration-200 ease-in-out hover:scale-[1.05] text-orange-300 "
+                  className="flex items-center gap-1 rounded-md bg-green-800 px-3 py-2 text-sm font-medium text-orange-500 transition-all duration-200 ease-in-out hover:scale-[1.05] "
                 >
-                  <Image 
-                    src={namastedevIcon} 
-                    alt="NamasteDev" 
-                    width={40} 
+                  <Image
+                    src={namastedevIcon}
+                    alt="NamasteDev"
+                    width={40}
                     height={40}
                     className="size-6 object-cover"
-                  />NamasteDev
+                  />
+                  NamasteDev
                 </a>
               </div>
             </div>
