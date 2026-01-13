@@ -8,7 +8,7 @@ A modern, responsive portfolio website designed to showcase my frontend developm
 
 ## 📌 Overview
 
-This portfolio serves as a personal platform to present my technical expertise, project work, and contact information. It is built using modern frontend technologies and follows industry best practices for responsiveness, maintainability, and performance
+This portfolio serves as a personal platform to present my technical expertise, project work, and contact information. It is built using modern frontend technologies and follows industry best practices for responsiveness, maintainability, and performance.
 
 ---
 
