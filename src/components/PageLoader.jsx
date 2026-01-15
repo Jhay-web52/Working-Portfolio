@@ -161,7 +161,7 @@ export default function PageLoader() {
                 key="static"
                 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center text-white/90 px-4"
               >
-                Hey👋, glad you're here 💫✨
+                Hey👋, glad youre here 💫✨
               </motion.div>
             )}
 
