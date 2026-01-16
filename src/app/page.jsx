@@ -14,10 +14,10 @@ import Experience from "@/components/Experience";
 export default function Home() {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setLoading(false), 2500);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <>
