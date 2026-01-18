@@ -17,285 +17,311 @@
 }
 
 /* ---------- PREMIUM PORTFOLIO LOADER ---------- */
-  #initial-loader {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
-    background-size: 400% 400%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100000;
-    overflow: hidden;
-    animation: gradient-shift 15s ease infinite;
-  }
+#initial-loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
+  background-size: 400% 400%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+  overflow: hidden;
+  animation: gradient-shift 15s ease infinite;
+}
 
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 
-  /* Animated radial gradient overlay */
-  #initial-loader::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 50% 50%, 
-      rgba(100, 100, 100, 0.1) 0%, 
-      transparent 50%);
-    animation: rotate-bg 20s linear infinite;
-  }
+/* Animated radial gradient overlay */
+#initial-loader::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(100, 100, 100, 0.1) 0%, 
+    transparent 50%);
+  animation: rotate-bg 20s linear infinite;
+}
 
-  @keyframes rotate-bg {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+@keyframes rotate-bg {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 
-  /* Grid pattern overlay */
-  #initial-loader::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.5;
-  }
+/* Grid pattern overlay */
+#initial-loader::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+}
 
-  /* Main container - Mobile First */
-  .loader-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 1rem;
-    max-width: 95%;
-    width: 100%;
-  }
+/* Main container - Mobile First */
+.loader-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 1rem;
+  max-width: 95%;
+  width: 100%;
+}
 
-  /* Typing animation container */
-  .typing-container {
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-    position: relative;
-  }
+/* Typing animation container */
+.typing-container {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  position: relative;
+}
 
-  .typing-line {
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    max-width: 95vw;
-  }
+.typing-line {
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 95vw;
+}
 
-  .typing-text {
-    font-size: clamp(1rem, 5vw, 2.2rem);
-    font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 50%, #808080 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-  }
+.typing-text {
+  font-size: clamp(1rem, 5vw, 2.2rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 50%, #808080 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
 
-  /* TRUE INFINITE LOOP - 10s cycle, repeats forever */
-  
-  /* Message 1: 0-2s */
-  .typing-text-1 {
-    animation: typing-cycle-1 10s linear infinite;
-  }
+/* TRUE INFINITE LOOP - 14s cycle with 7 messages */
 
-  @keyframes typing-cycle-1 {
-    0% { width: 0; opacity: 0; }
-    1% { width: 0; opacity: 1; }  /* Start typing */
-    15% { width: 100%; opacity: 1; border-right-color: #ffffff; }  /* Fully typed */
-    19% { width: 100%; opacity: 0; border-right-color: transparent; }  /* Fade out */
-    100% { width: 0; opacity: 0; }  /* Stay hidden */
-  }
+/* Message 1: 0-2s */
+.typing-text-1 {
+  animation: typing-cycle-1 14s linear infinite;
+}
 
-  /* Message 2: 2-4s */
-  .typing-text-2 {
-    animation: typing-cycle-2 10s linear infinite;
-  }
+@keyframes typing-cycle-1 {
+  0% { width: 0; opacity: 0; }
+  1% { width: 0; opacity: 1; }
+  12% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  13% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
 
-  @keyframes typing-cycle-2 {
-    0%, 19% { width: 0; opacity: 0; }
-    20% { width: 0; opacity: 1; }  /* Start typing */
-    35% { width: 100%; opacity: 1; border-right-color: #ffffff; }  /* Fully typed */
-    39% { width: 100%; opacity: 0; border-right-color: transparent; }  /* Fade out */
-    100% { width: 0; opacity: 0; }  /* Stay hidden */
-  }
+/* Message 2: 2-4s */
+.typing-text-2 {
+  animation: typing-cycle-2 14s linear infinite;
+}
 
-  /* Message 3: 4-6s */
-  .typing-text-3 {
-    animation: typing-cycle-3 10s linear infinite;
-  }
+@keyframes typing-cycle-2 {
+  0%, 13% { width: 0; opacity: 0; }
+  14% { width: 0; opacity: 1; }
+  26% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  27% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
 
-  @keyframes typing-cycle-3 {
-    0%, 39% { width: 0; opacity: 0; }
-    40% { width: 0; opacity: 1; }  /* Start typing */
-    55% { width: 100%; opacity: 1; border-right-color: #ffffff; }  /* Fully typed */
-    59% { width: 100%; opacity: 0; border-right-color: transparent; }  /* Fade out */
-    100% { width: 0; opacity: 0; }  /* Stay hidden */
-  }
+/* Message 3: 4-6s */
+.typing-text-3 {
+  animation: typing-cycle-3 14s linear infinite;
+}
 
-  /* Message 4: 6-8s */
-  .typing-text-4 {
-    animation: typing-cycle-4 10s linear infinite;
-  }
+@keyframes typing-cycle-3 {
+  0%, 27% { width: 0; opacity: 0; }
+  28% { width: 0; opacity: 1; }
+  40% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  41% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
 
-  @keyframes typing-cycle-4 {
-    0%, 59% { width: 0; opacity: 0; }
-    60% { width: 0; opacity: 1; }  /* Start typing */
-    75% { width: 100%; opacity: 1; border-right-color: #ffffff; }  /* Fully typed */
-    79% { width: 100%; opacity: 0; border-right-color: transparent; }  /* Fade out */
-    100% { width: 0; opacity: 0; }  /* Stay hidden */
-  }
+/* Message 4: 6-8s */
+.typing-text-4 {
+  animation: typing-cycle-4 14s linear infinite;
+}
 
-  /* Message 5: 8-10s */
-  .typing-text-5 {
-    animation: typing-cycle-5 10s linear infinite;
-  }
+@keyframes typing-cycle-4 {
+  0%, 41% { width: 0; opacity: 0; }
+  42% { width: 0; opacity: 1; }
+  54% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  55% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
 
-  @keyframes typing-cycle-5 {
-    0%, 79% { width: 0; opacity: 0; }
-    80% { width: 0; opacity: 1; }  /* Start typing */
-    95% { width: 100%; opacity: 1; border-right-color: #ffffff; }  /* Fully typed */
-    99% { width: 100%; opacity: 0; border-right-color: transparent; }  /* Fade out */
-    100% { width: 0; opacity: 0; }  /* Reset for next cycle */
-  }
+/* Message 5: 8-10s */
+.typing-text-5 {
+  animation: typing-cycle-5 14s linear infinite;
+}
 
-  /* Decorative particles */
-  .loader-particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
+@keyframes typing-cycle-5 {
+  0%, 55% { width: 0; opacity: 0; }
+  56% { width: 0; opacity: 1; }
+  68% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  69% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
+
+/* Message 6: 10-12s */
+.typing-text-6 {
+  animation: typing-cycle-6 14s linear infinite;
+}
+
+@keyframes typing-cycle-6 {
+  0%, 69% { width: 0; opacity: 0; }
+  70% { width: 0; opacity: 1; }
+  82% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  83% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
+
+/* Message 7: 12-14s */
+.typing-text-7 {
+  animation: typing-cycle-7 14s linear infinite;
+}
+
+@keyframes typing-cycle-7 {
+  0%, 83% { width: 0; opacity: 0; }
+  84% { width: 0; opacity: 1; }
+  98% { width: 100%; opacity: 1; border-right-color: #ffffff; }
+  99% { width: 100%; opacity: 0; border-right-color: transparent; }
+  100% { width: 0; opacity: 0; }
+}
+
+/* Decorative particles */
+.loader-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: float-particle 5s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% { 
+    transform: translateY(0) translateX(0) scale(1);
     opacity: 0;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    animation: float-particle 5s ease-in-out infinite;
   }
+  10% {
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateY(-120px) translateX(60px) scale(1.5);
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.2;
+  }
+}
 
-  @keyframes float-particle {
-    0%, 100% { 
-      transform: translateY(0) translateX(0) scale(1);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.8;
-    }
-    50% { 
-      transform: translateY(-120px) translateX(60px) scale(1.5);
-      opacity: 0.6;
-    }
-    90% {
-      opacity: 0.2;
-    }
-  }
+.loader-particle:nth-child(1) { 
+  left: 15%; 
+  top: 60%;
+  animation-delay: 0s;
+  animation-duration: 4.5s;
+}
+.loader-particle:nth-child(2) { 
+  left: 25%; 
+  top: 40%;
+  animation-delay: 1.2s;
+  animation-duration: 5.2s;
+}
+.loader-particle:nth-child(3) { 
+  left: 50%; 
+  top: 70%;
+  animation-delay: 2.5s;
+  animation-duration: 4.8s;
+}
+.loader-particle:nth-child(4) { 
+  left: 75%; 
+  top: 35%;
+  animation-delay: 1.8s;
+  animation-duration: 5.5s;
+}
+.loader-particle:nth-child(5) { 
+  left: 85%; 
+  top: 55%;
+  animation-delay: 0.8s;
+  animation-duration: 4.2s;
+}
+.loader-particle:nth-child(6) { 
+  left: 40%; 
+  top: 50%;
+  animation-delay: 3s;
+  animation-duration: 5s;
+}
 
-  .loader-particle:nth-child(1) { 
-    left: 15%; 
-    top: 60%;
-    animation-delay: 0s;
-    animation-duration: 4.5s;
-  }
-  .loader-particle:nth-child(2) { 
-    left: 25%; 
-    top: 40%;
-    animation-delay: 1.2s;
-    animation-duration: 5.2s;
-  }
-  .loader-particle:nth-child(3) { 
-    left: 50%; 
-    top: 70%;
-    animation-delay: 2.5s;
-    animation-duration: 4.8s;
-  }
-  .loader-particle:nth-child(4) { 
-    left: 75%; 
-    top: 35%;
-    animation-delay: 1.8s;
-    animation-duration: 5.5s;
-  }
-  .loader-particle:nth-child(5) { 
-    left: 85%; 
-    top: 55%;
-    animation-delay: 0.8s;
-    animation-duration: 4.2s;
-  }
-  .loader-particle:nth-child(6) { 
-    left: 40%; 
-    top: 50%;
-    animation-delay: 3s;
-    animation-duration: 5s;
-  }
+/* Responsive - Mobile First Approach */
 
-  /* Responsive - Mobile First Approach */
-  
-  /* Small phones (320px - 480px) - Base styles above already optimized */
-  
-  /* Medium phones and up (481px+) */
-  @media (min-width: 481px) {
-    .typing-text {
-      letter-spacing: 0.6px;
-      border-right-width: 2.5px;
-    }
-    .typing-line {
-      height: 3rem;
-    }
-    .typing-container {
-      min-height: 90px;
-      gap: 0.25rem;
-    }
-  }
+/* Small phones (320px - 480px) - Base styles above already optimized */
 
-  /* Tablets and up (768px+) */
-  @media (min-width: 768px) {
-    .loader-content {
-      padding: 1.5rem;
-      max-width: 90%;
-    }
-    .typing-text {
-      letter-spacing: 0.7px;
-      border-right-width: 3px;
-    }
-    .typing-line {
-      height: 3.5rem;
-    }
-    .typing-container {
-      min-height: 100px;
-      gap: 0.3rem;
-    }
+/* Medium phones and up (481px+) */
+@media (min-width: 481px) {
+  .typing-text {
+    letter-spacing: 0.6px;
+    border-right-width: 2.5px;
   }
+  .typing-line {
+    height: 3rem;
+  }
+  .typing-container {
+    min-height: 90px;
+    gap: 0.25rem;
+  }
+}
 
-  /* Desktop and up (1024px+) */
-  @media (min-width: 1024px) {
-    .loader-content {
-      padding: 2rem;
-    }
-    .typing-text {
-      letter-spacing: 0.8px;
-    }
-    .typing-container {
-      min-height: 120px;
-    }
+/* Tablets and up (768px+) */
+@media (min-width: 768px) {
+  .loader-content {
+    padding: 1.5rem;
+    max-width: 90%;
   }
+  .typing-text {
+    letter-spacing: 0.7px;
+    border-right-width: 3px;
+  }
+  .typing-line {
+    height: 3.5rem;
+  }
+  .typing-container {
+    min-height: 100px;
+    gap: 0.3rem;
+  }
+}
 
-  /* Large screens (1440px+) */
-  @media (min-width: 1440px) {
-    .typing-line {
-      height: 4rem;
-    }
+/* Desktop and up (1024px+) */
+@media (min-width: 1024px) {
+  .loader-content {
+    padding: 2rem;
   }
+  .typing-text {
+    letter-spacing: 0.8px;
+  }
+  .typing-container {
+    min-height: 120px;
+  }
+}
+
+/* Large screens (1440px+) */
+@media (min-width: 1440px) {
+  .typing-line {
+    height: 4rem;
+  }
+}
