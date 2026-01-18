@@ -24,10 +24,40 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body style={{ backgroundColor: "#121212" }}>
-        {/* INSTANT CSS LOADER */}
-        <div id="initial-loader">
-          <div className="pulse"></div>
-        </div>
+{/* 
+<!-- Add this to your RootLayout body --> */}
+<div id="initial-loader">
+  {/* <!-- Floating particles --> */}
+  <div class="loader-particle"></div>
+  <div class="loader-particle"></div>
+  <div class="loader-particle"></div>
+  <div class="loader-particle"></div>
+  <div class="loader-particle"></div>
+  <div class="loader-particle"></div>
+
+  <div class="loader-content">
+    {/* <!-- Typing animation --> */}
+    <div class="typing-container">
+      <div class="typing-line">
+        <span class="typing-text typing-text-1">Welcome to Prabhulal Raghwani Portfolio ⚡</span>
+      </div>
+      <div class="typing-line">
+        <span class="typing-text typing-text-2">Front-End Developer & Designer 💻</span>
+      </div>
+      <div class="typing-line">
+        <span class="typing-text typing-text-3">Crafting Beautiful Web Experiences ✨</span>
+      </div>
+      <div class="typing-line">
+        <span class="typing-text typing-text-4">Turning Ideas Into Reality 🚀</span>
+      </div>
+      <div class="typing-line">
+        <span class="typing-text typing-text-5">Building The Future, One Line at a Time 🌟</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
         {/* Removes CSS loader after hydration */}
         <ClientLoaderCleanup />

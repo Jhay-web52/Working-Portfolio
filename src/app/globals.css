@@ -17,77 +17,278 @@
 }
 
 /* ---------- PREMIUM PORTFOLIO LOADER ---------- */
-#initial-loader {
-  position: fixed;
-  inset: 0;
-  background: #0d0d0f; /* matches your dark theme */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100000;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
-  overflow: hidden;
-}
+ /* ---------- PREMIUM PORTFOLIO LOADER ---------- */
+  #initial-loader {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
+    background-size: 400% 400%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    overflow: hidden;
+    animation: gradient-shift 15s ease infinite;
+  }
 
-/* Central glowing pulse */
-#initial-loader .pulse {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #6a5af9, #ff4d5a, #00f0ff);
-  background-size: 400% 400%;
-  animation: pulse 1.6s ease-in-out infinite, gradientShift 4s ease infinite;
-  box-shadow: 0 0 20px rgba(255, 77, 90, 0.6),
-              0 0 40px rgba(106, 90, 249, 0.5),
-              0 0 60px rgba(0, 240, 255, 0.4);
-}
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
 
-/* Optional spinning ring for premium feel */
-#initial-loader .spinner {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border: 3px solid rgba(255, 255, 255, 0.05);
-  border-top: 3px solid #6a5af9;
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite;
-}
+  /* Animated radial gradient overlay */
+  #initial-loader::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, 
+      rgba(100, 100, 100, 0.1) 0%, 
+      transparent 50%);
+    animation: rotate-bg 20s linear infinite;
+  }
 
-/* Loader text */
-#initial-loader .loader-text {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #6a5af9;
-  text-align: center;
-  letter-spacing: 1px;
-  animation: fadeIn 2s ease-in-out infinite alternate;
-}
+  @keyframes rotate-bg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-/* Pulse animation */
-@keyframes pulse {
-  0% { transform: scale(0.7); opacity: 0.4; }
-  50% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.7); opacity: 0.4; }
-}
+  /* Grid pattern overlay */
+  #initial-loader::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.5;
+  }
 
-/* Gradient shift for neon effect */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  /* Main container */
+  .loader-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 90%;
+  }
 
-/* Spin animation */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  /* Typing animation container */
+  .typing-container {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    position: relative;
+  }
 
-/* Loader text fade animation */
-@keyframes fadeIn {
-  0% { opacity: 0.5; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(-5px); }
-  100% { opacity: 0.5; transform: translateY(0px); }
-}
+  .typing-line {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .typing-text {
+    font-size: clamp(1.3rem, 3.8vw, 2.2rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #b8b8b8 50%, #808080 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #ffffff;
+    width: 0;
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Infinite loop typing animations - 5 messages, 20s total cycle */
+  .typing-text-1 {
+    animation: 
+      type-width 1.5s steps(35) 0.5s forwards,
+      fade-in 0.3s ease-in 0.5s forwards,
+      blink-cursor 0.75s step-end infinite 0.5s,
+      fade-out 0.5s ease-out 3s forwards,
+      reset-1 0s linear 20s infinite;
+  }
+
+  .typing-text-2 {
+    animation: 
+      type-width 1.5s steps(35) 4s forwards,
+      fade-in 0.3s ease-in 4s forwards,
+      blink-cursor 0.75s step-end infinite 4s,
+      fade-out 0.5s ease-out 6.5s forwards,
+      reset-2 0s linear 20s infinite;
+  }
+
+  .typing-text-3 {
+    animation: 
+      type-width 1.5s steps(35) 7.5s forwards,
+      fade-in 0.3s ease-in 7.5s forwards,
+      blink-cursor 0.75s step-end infinite 7.5s,
+      fade-out 0.5s ease-out 10s forwards,
+      reset-3 0s linear 20s infinite;
+  }
+
+  .typing-text-4 {
+    animation: 
+      type-width 1.5s steps(35) 11s forwards,
+      fade-in 0.3s ease-in 11s forwards,
+      blink-cursor 0.75s step-end infinite 11s,
+      fade-out 0.5s ease-out 13.5s forwards,
+      reset-4 0s linear 20s infinite;
+  }
+
+  .typing-text-5 {
+    animation: 
+      type-width 1.5s steps(35) 14.5s forwards,
+      fade-in 0.3s ease-in 14.5s forwards,
+      blink-cursor 0.75s step-end infinite 14.5s,
+      fade-out 0.5s ease-out 17s forwards,
+      reset-5 0s linear 20s infinite;
+  }
+
+  /* Typing effect */
+  @keyframes type-width {
+    to { width: 100%; }
+  }
+
+  /* Fade in */
+  @keyframes fade-in {
+    to { opacity: 1; }
+  }
+
+  /* Fade out */
+  @keyframes fade-out {
+    to { 
+      opacity: 0; 
+      border-right-color: transparent;
+    }
+  }
+
+  /* Reset animations for infinite loop */
+  @keyframes reset-1 {
+    0%, 15% { width: 0; opacity: 0; border-right-color: #ffffff; }
+  }
+  @keyframes reset-2 {
+    0%, 30% { width: 0; opacity: 0; border-right-color: #ffffff; }
+  }
+  @keyframes reset-3 {
+    0%, 50% { width: 0; opacity: 0; border-right-color: #ffffff; }
+  }
+  @keyframes reset-4 {
+    0%, 65% { width: 0; opacity: 0; border-right-color: #ffffff; }
+  }
+  @keyframes reset-5 {
+    0%, 85% { width: 0; opacity: 0; border-right-color: #ffffff; }
+  }
+
+  /* Cursor blink */
+  @keyframes blink-cursor {
+    50% { border-right-color: transparent; }
+  }
+
+  /* Decorative particles */
+  .loader-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: float-particle 5s ease-in-out infinite;
+  }
+
+  @keyframes float-particle {
+    0%, 100% { 
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    50% { 
+      transform: translateY(-120px) translateX(60px) scale(1.5);
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.2;
+    }
+  }
+
+  .loader-particle:nth-child(1) { 
+    left: 15%; 
+    top: 60%;
+    animation-delay: 0s;
+    animation-duration: 4.5s;
+  }
+  .loader-particle:nth-child(2) { 
+    left: 25%; 
+    top: 40%;
+    animation-delay: 1.2s;
+    animation-duration: 5.2s;
+  }
+  .loader-particle:nth-child(3) { 
+    left: 50%; 
+    top: 70%;
+    animation-delay: 2.5s;
+    animation-duration: 4.8s;
+  }
+  .loader-particle:nth-child(4) { 
+    left: 75%; 
+    top: 35%;
+    animation-delay: 1.8s;
+    animation-duration: 5.5s;
+  }
+  .loader-particle:nth-child(5) { 
+    left: 85%; 
+    top: 55%;
+    animation-delay: 0.8s;
+    animation-duration: 4.2s;
+  }
+  .loader-particle:nth-child(6) { 
+    left: 40%; 
+    top: 50%;
+    animation-delay: 3s;
+    animation-duration: 5s;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .typing-line {
+      height: 3rem;
+    }
+    .loader-content {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .loader-content {
+      padding: 1rem;
+    }
+    .typing-line {
+      height: 2.8rem;
+    }
+    .typing-container {
+      gap: 0.2rem;
+      min-height: 100px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .typing-text {
+      font-size: clamp(1rem, 4vw, 1.3rem);
+    }
+    .typing-line {
+      height: 2.5rem;
+    }
+  }
