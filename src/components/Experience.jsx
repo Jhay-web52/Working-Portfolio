@@ -4,14 +4,25 @@ import { motion, useInView } from "framer-motion";
 import ExperienceWrapper from "./experience/ExperienceWrapper";
 
 
+// Experience --->work flow
+//  └── ExperienceWrapper
+//       ├── CompaniesBar
+//       │     └── setDescriptionJob("ADDigitech")
+//       │
+//       └── AnimatePresence
+//             └── motion.div (key = job name)
+//                   └── ADDigitech / LnvDigitalExperience
+
+
+
 const Experience = (props) => {
   const refHeading = useRef(null);
   const refContent = useRef(null);
-  const inViewHeading = useInView(refHeading);
+  const inViewHeading = useInView(refHeading);//watches when that element enters the viewport
   const inViewContent = useInView(refContent, { once: true });
   const variants1 = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
+    initial: { opacity: 0, y: 50 },//Heading starts below + invisible
+    animate: { opacity: 1, y: 0 },//When scrolled into view → slides up + fades in
   };
 
   return (
