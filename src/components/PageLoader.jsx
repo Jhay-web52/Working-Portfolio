@@ -54,7 +54,7 @@ export default function PageLoader() {
   useEffect(() => {
     if (!hydrated) return;
 
-    const total = 8000;
+    const total = 6000;
     const step = 50;
     const inc = (step / total) * 100;
 
@@ -161,7 +161,7 @@ useEffect(() => {
             <span>{Math.round(progress)}%</span>
           </div>
 
-          <div className="relative h-[3px] sm:h-[4px] bg-white/10 overflow-hidden rounded-full">
+          <div className="relative h-[4px] sm:h-[4px] bg-white/10 overflow-hidden rounded-full">
             <motion.div
               className="absolute inset-y-0 left-0 bg-white"
               style={{ width: `${progress}%` }}

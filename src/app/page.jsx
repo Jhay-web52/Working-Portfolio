@@ -22,7 +22,7 @@ export default function Home() {
     const timer = setTimeout(() => {
       setShowContent(true);
       document.body.style.overflow = "auto";
-    }, 8000); // MUST match PageLoader duration
+    }, 6000); // MUST match PageLoader duration
 
     return () => clearTimeout(timer);
   }, []);
