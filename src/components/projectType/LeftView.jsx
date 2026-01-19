@@ -13,8 +13,8 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
     <div className="mt-[80px] grid grid-cols-1 md:px-10 xl:mt-[120px] xl:grid-cols-12">
       <motion.div
         ref={refContent}
-        initial={{ opacity: 0, x: -50 }}
-        animate={inViewContent && { opacity: 1, x: 0 }}
+        initial={{ opacity: 0, x: -50 }} // Invisible at start , 50px left (LeftView) or 50px right (RightView)
+        animate={inViewContent && { opacity: 1, x: 0 }} // Final position and visibility
         viewport={{
           once: true,
           amount: 1,
@@ -80,11 +80,11 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
       {/* project image */}
       <motion.div
         ref={refContent}
-        initial={{ opacity: 0, filter: "blur(6px)" }}
+        initial={{ opacity: 0, filter: "blur(6px)" }}// blur(6px), opacity: 0 
         animate={
           inViewContent
-            ? { opacity: 1, filter: "blur(0px)" }
-            : { opacity: 1, filter: "blur(6px) " }
+            ? { opacity: 1, filter: "blur(0px)" }  
+            : { opacity: 1, filter: "blur(6px) " } // Scrolls into view  , blur(0px), opacity: 1  
         }
         transition={{ duration: 1 }}
         className="order-1 col-span-7 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.05] xl:order-2 xl:self-start xl:justify-self-end"

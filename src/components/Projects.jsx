@@ -74,3 +74,44 @@ const Projects = () => {
 };
 
 export default Projects;
+
+// project section flow
+
+// ┌───────────────────────────┐
+// │ ProjectList (Data)        │
+// │ [{id, name, description,  │
+// │ img, tech, source, demo}] │
+// └───────────────┬───────────┘
+//                 ↓
+// ┌───────────────────────────┐
+// │ Projects.jsx              │
+// │ Decide how many to show   │
+// │ displayedProjects         │
+// └───────────────┬───────────┘
+//                 ↓
+// ┌───────────────────────────┐
+// │ Decide Layout Side        │
+// │ id % 2 === 0 → LeftView   │
+// │ id % 2 !== 0 → RightView  │
+// └───────────────┬───────────┘
+//                 ↓
+// ┌───────────────────────────┐
+// │ LeftView / RightView       │
+// │ - Text: name + description │
+// │ - Tech stack               │
+// │ - Buttons: source/demo     │
+// │ - Image                    │
+// └───────────────┬───────────┘
+//                 ↓
+// ┌───────────────────────────┐
+// │ Framer Motion Animations  │
+// │ - Text slide-in           │
+// │ - Image blur → sharp      │
+// └───────────────┬───────────┘
+//                 ↓
+// ┌───────────────────────────┐
+// │ Browser Renders           │
+// │ Projects visually with    │
+// │ alternating Left/Right    │
+// └───────────────────────────┘
+
