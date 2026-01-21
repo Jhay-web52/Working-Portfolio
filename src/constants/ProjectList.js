@@ -15,6 +15,7 @@ export const ProjectList = [
       "Implemented responsive layouts and interactive elements to showcase trading services and educational programs.",
       "Integrated navigation and call-to-action sections to drive user engagement and conversions."
     ],
+    img: jhayfx,
     tech: ["React", "Next.js", "Tailwind CSS", "JavaScript"],
     source: "https://github.com/Jhay-web52/JhayFx.git",
     demo: "https://jhayfx.vercel.app"
@@ -27,6 +28,7 @@ export const ProjectList = [
       "Implemented live rendering with syntax highlighting and responsive split-pane layout.",
       "Built with modern frameworks for smooth performance and user experience."
     ],
+    img: markdownPreview,
     tech: ["Vue.js", "Nuxt.js", "Markdown", "JavaScript"],
     source: "https://github.com/Jhay-web52/Markdown-Preview.git",
     demo: "https://markdown-preview-five.vercel.app"
@@ -39,6 +41,7 @@ export const ProjectList = [
       "Integrated intelligent algorithms to analyze and provide real-time coding recommendations.",
       "Built a user-friendly interface with responsive design for seamless code editing experience."
     ],
+    img: codeflowAI,
     tech: ["React", "TypeScript", "AI API", "Tailwind CSS"],
     source: "https://github.com/Jhay-web52/CodeFlow-AI.git",
     demo: "https://codeflow-ai-zeta.vercel.app"
@@ -51,6 +54,7 @@ export const ProjectList = [
       "Implemented smooth animations and transitions for enhanced visual appeal.",
       "Optimized for mobile responsiveness and cross-browser compatibility."
     ],
+    img: scissorsLanding,
     tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
     source: "https://github.com/Jhay-web52/Landing-page.git",
     demo: "https://jhay-web52.github.io/Landing-page/"
@@ -63,6 +67,7 @@ export const ProjectList = [
       "Implemented interactive features and smooth scrolling animations for better user engagement.",
       "Built with modern CSS techniques for a polished and professional appearance."
     ],
+    img: sunnyLanding,
     tech: ["HTML", "CSS", "JavaScript", "UI Design"],
     source: "https://github.com/Jhay-web52/Sunny-Landing-Page.git",
     demo: "https://jhay-web52.github.io/Sunny-Landing-Page/"
@@ -75,6 +80,7 @@ export const ProjectList = [
       "Implemented product showcasing, navigation, and responsive layouts.",
       "Optimized performance and user experience across all devices."
     ],
+    img: bejamas,
     tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
     source: "https://github.com/Jhay-web52/Bejamas.git",
     demo: "https://jhay-web52.github.io/Bejamas/"
@@ -87,6 +93,7 @@ export const ProjectList = [
       "Implemented search and filter functionality to help users find movies by name and genre.",
       "Built with responsive design for optimal viewing on all screen sizes."
     ],
+    img: movieApp,
     tech: ["JavaScript", "Movie API", "HTML", "CSS"],
     source: "https://github.com/Jhay-web52/Movie-list.git",
     demo: "https://jhay-web52.github.io/Movie-list/"
