@@ -5,7 +5,7 @@ import scissorsLanding from "@/assets/projects/scissors-landing.png"
 import sunnyLanding from "@/assets/projects/sunny-landing.png"
 import bejamas from "@/assets/projects/bejamas.png"
 import movieApp from "@/assets/projects/movie-app.png"
-import Blog from "@/assets/projects/blog.png"
+import blog from "@/assets/projects/blog.png"
 
 export const ProjectList = [
   {
@@ -101,13 +101,13 @@ export const ProjectList = [
   },
   {
     id: 8,
-    name: "Blog",
+    name: "Blog App",
     description: [
       "Created a personal blog platform for sharing articles and insights on various topics.",
       "Implemented user-friendly navigation and responsive design for better readability.",
       "Built with modern web technologies for smooth performance and scalability."
     ],
-    img: Blog,
+    img: blog,
     tech: ["HTML", "CSS", "JavaScript", "Responsive Design" , "Vue.js"],
     source: "https://github.com/Jhay-web52/Blog-Application.git",
     demo: "https://blog-application-gamma-seven.vercel.app"
