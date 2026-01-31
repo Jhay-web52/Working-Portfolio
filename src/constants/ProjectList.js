@@ -5,6 +5,7 @@ import scissorsLanding from "@/assets/projects/scissors-landing.png"
 import sunnyLanding from "@/assets/projects/sunny-landing.png"
 import bejamas from "@/assets/projects/bejamas.png"
 import movieApp from "@/assets/projects/movie-app.png"
+import Blog from "@/assets/projects/blog.png"
 
 export const ProjectList = [
   {
@@ -97,5 +98,18 @@ export const ProjectList = [
     tech: ["JavaScript", "Movie API", "HTML", "CSS"],
     source: "https://github.com/Jhay-web52/Movie-list.git",
     demo: "https://jhay-web52.github.io/Movie-list/"
+  },
+  {
+    id: 8,
+    name: "Blog",
+    description: [
+      "Created a personal blog platform for sharing articles and insights on various topics.",
+      "Implemented user-friendly navigation and responsive design for better readability.",
+      "Built with modern web technologies for smooth performance and scalability."
+    ],
+    img: Blog,
+    tech: ["HTML", "CSS", "JavaScript", "Responsive Design" , "Vue.js"],
+    source: "https://github.com/Jhay-web52/Blog-Application.git",
+    demo: "https://blog-application-gamma-seven.vercel.app"
   }
 ];
