@@ -22,7 +22,7 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
         transition={{
           duration: 0.5,
         }}
-        className="relative order-2 col-span-5 flex w-full flex-col items-start xl:order-1"
+        className="relative order-2 col-span-12 lg:col-span-7 flex w-full flex-col items-start xl:order-1"
       >
         {/* project tagline */}
         <div
@@ -31,20 +31,24 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
           <h3 className="font-bold text-heading">{name}</h3>
         </div>
         {/* description absolute */}
-        <div className="group left-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark p-2 shadow-sm shadow-slate-800 lg:absolute lg:w-[500px]">
+        <div className="group left-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark p-4 border border-white/5 shadow-xl shadow-black/20 lg:absolute lg:w-[450px]">
           {description.map((item, i) => (
-            <div key={i} className="flex items-start gap-1 sm:gap-2">
-              <ArrowRight className={" h-5 w-4 flex-none"} />
-              <div className="text-sm text-textWhite">
+            <div key={i} className="flex items-start gap-1 sm:gap-2 mb-2 last:mb-0">
+              <ArrowRight className={" h-5 w-4 flex-none text-[#31d1d1]"} />
+              <div className="text-sm text-textWhite leading-relaxed">
                 <p>{item}</p>
               </div>
             </div>
           ))}
         </div>
         {/* tech stack */}
-        <div className="mt-4 flex items-center gap-2 text-xs font-medium text-heading md:gap-3 md:text-sm lg:mt-[200px] ">
+        <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-medium text-heading md:gap-3 md:text-sm lg:mt-[180px] ">
           {tech?.map((item, i) => {
-            return <span key={i}>{item}</span>;
+            return (
+              <span key={i} className="px-2 py-1 bg-white/5 rounded-md border border-white/10 uppercase tracking-wider text-[10px]">
+                {item}
+              </span>
+            );
           })}
         </div>
         {/* links */}
@@ -54,10 +58,10 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
               href={source}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex animate-bounce cursor-pointer flex-col items-center gap-1"
+              className="group relative flex cursor-pointer flex-col items-center gap-1 text-textLight hover:text-white transition-colors"
             >
-              <GitHubIcon />
-              <span className="absolute left-[50%] top-[150%] w-[90px] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+              <GitHubIcon className="animate-pulse group-hover:animate-none" />
+              <span className="absolute left-[50%] top-[150%] w-[90px] translate-x-[-50%] translate-y-[-50%] whitespace-nowrap px-2 text-[10px] bg-bgDark border border-white/10 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 Source Code
               </span>
             </a>
@@ -67,11 +71,11 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
               href={demo}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex animate-bounce cursor-pointer flex-col items-center gap-1"
+              className="group relative flex cursor-pointer flex-col items-center gap-1 text-[#31d1d1] hover:text-[#31d1d1]/80 transition-colors"
             >
-              <LaunchIcon />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Demo
+              <LaunchIcon className="animate-pulse group-hover:animate-none" />
+              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-[10px] bg-bgDark border border-[#31d1d1]/20 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                Live Demo
               </span>
             </a>
           )}
@@ -87,22 +91,24 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
             : { opacity: 1, filter: "blur(6px) " } // Scrolls into view  , blur(0px), opacity: 1  
         }
         transition={{ duration: 1 }}
-        className="order-1 col-span-7 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.05] xl:order-2 xl:self-start xl:justify-self-end"
+        className="order-1 col-span-12 lg:col-span-5 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] xl:order-2 xl:self-start xl:justify-self-end mt-4 lg:mt-0"
       >
         <a
           href={demo}
           target="_blank"
-          className="mx-auto flex w-fit items-center justify-center lg:mx-0 lg:justify-end "
+          className="relative group block w-full aspect-video lg:w-[420px] lg:h-[260px] overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50"
         >
           {img && (
             <Image
-              width={500}
-              height={300}
+              fill
               src={img}
-              alt=""
-              className=" cursor-pointer rounded-md"
+              alt={name}
+              className="object-cover group-hover:scale-110 transition-transform duration-700"
             />
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+            <span className="text-white text-xs font-bold uppercase tracking-widest">View Live Site</span>
+          </div>
         </a>
       </motion.div>
     </div>

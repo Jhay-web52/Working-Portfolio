@@ -21,22 +21,24 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
             : { opacity: 1, filter: "blur(6px) brightness(50%)" }
         }
         transition={{ duration: 1 }}
-        className="col-span-7 w-full lg:w-fit brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.05] hover:brightness-100"
+        className="col-span-12 lg:col-span-5 w-full brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] hover:brightness-100 flex justify-start"
       >
         <a
           href={demo}
           target="_blank"
-          className="mx-auto flex w-fit items-center justify-center lg:mx-0 lg:justify-start"
+          className="relative group block w-full aspect-video lg:w-[420px] lg:h-[260px] overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50"
         >
           {img && (
             <Image
-              width={500}
-              height={300}
+              fill
               src={img}
-              alt=""
-              className=" cursor-pointer rounded-md"
+              alt={name}
+              className="object-cover group-hover:scale-110 transition-transform duration-700"
             />
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+            <span className="text-white text-xs font-bold uppercase tracking-widest">View Live Site</span>
+          </div>
         </a>
       </motion.div>
       <motion.div
@@ -50,7 +52,7 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
         transition={{
           duration: 0.5,
         }}
-        className="relative col-span-5 flex w-full flex-col items-end"
+        className="relative col-span-12 lg:col-span-7 flex w-full flex-col items-end mt-4 lg:mt-0"
       >
         {/* project tagline */}
         <div
@@ -59,20 +61,24 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
           <h3 className="text-heading font-bold">{name}</h3>
         </div>
         {/* description absolute */}
-        <div className="group right-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark shadow-sm shadow-slate-800 p-2 lg:absolute lg:w-[500px]">
+        <div className="group right-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark shadow-xl shadow-black/20 p-4 border border-white/5 lg:absolute lg:w-[450px]">
           {description?.map((item, i) => (
-            <div key={i} className="flex items-start gap-1 sm:gap-2">
-              <ArrowRight className={" h-5 w-4 flex-none"} />
-              <div className="text-sm text-textWhite">
+            <div key={i} className="flex items-start gap-1 sm:gap-2 mb-2 last:mb-0">
+              <ArrowRight className={" h-5 w-4 flex-none text-[#31d1d1]"} />
+              <div className="text-sm text-textWhite leading-relaxed">
                 <p>{item}</p>
               </div>
             </div>
           ))}
         </div>
         {/* tech stack */}
-        <div className="mt-4 flex items-center gap-2 text-xs text-heading font-medium md:gap-3 md:text-sm lg:mt-[200px] ">
+        <div className="mt-4 flex flex-wrap items-center justify-end gap-2 text-xs text-heading font-medium md:gap-3 md:text-sm lg:mt-[180px] ">
           {tech?.map((item, i) => {
-            return <span key={i}>{item}</span>;
+            return (
+              <span key={i} className="px-2 py-1 bg-white/5 rounded-md border border-white/10 uppercase tracking-wider text-[10px]">
+                {item}
+              </span>
+            );
           })}
         </div>
         {/* links */}
@@ -82,10 +88,10 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
               href={source}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex animate-bounce cursor-pointer items-center gap-1"
+              className="group relative flex cursor-pointer items-center gap-1 text-textLight hover:text-white transition-colors"
             >
-              <GitHubIcon />
-              <span className="absolute -left-[135%] top-7 w-[90px] whitespace-nowrap px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
+              <GitHubIcon className="animate-pulse group-hover:animate-none" />
+              <span className="absolute -left-[135%] top-7 w-[90px] whitespace-nowrap px-2 text-[10px] bg-bgDark border border-white/10 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 Source Code
               </span>
             </a>
@@ -95,11 +101,11 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
               href={demo}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex animate-bounce cursor-pointer items-center gap-2"
+              className="group relative flex cursor-pointer items-center gap-2 text-[#31d1d1] hover:text-[#31d1d1]/80 transition-colors"
             >
-              <LaunchIcon />
-              <span className="absolute -left-[60%] top-7 w-fit px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Demo
+              <LaunchIcon className="animate-pulse group-hover:animate-none" />
+              <span className="absolute -left-[60%] top-7 w-fit px-2 text-[10px] bg-bgDark border border-[#31d1d1]/20 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                Live Demo
               </span>
             </a>
           )}

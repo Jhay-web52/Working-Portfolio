@@ -1,0 +1,39 @@
+[
+  {
+    "repoName": "JhayFx",
+    "description": "The technical evolution of JhayFx centered on leveraging HTML to its full potential. I engineered a modular architecture that prioritizes clean code practices and intuitive interaction models.",
+    "demoUrl": "https://jhayfx.vercel.app"
+  },
+  {
+    "repoName": "Markdown-Preview",
+    "description": "With Markdown Preview, I dived deep into the intricacies of Vue development. The project involved solving critical technical hurdles through iterative prototyping and rigorous testing of core functionalities.",
+    "demoUrl": "https://markdown-preview-five.vercel.app"
+  },
+  {
+    "repoName": "CodeFlow-AI",
+    "description": "The technical evolution of CodeFlow AI centered on leveraging JavaScript to its full potential. I engineered a modular architecture that prioritizes clean code practices and intuitive interaction models.",
+    "demoUrl": "https://codeflow-ai-zeta.vercel.app"
+  },
+  {
+    "repoName": "scissors-landing",
+    "description": ""
+  },
+  {
+    "repoName": "sunny-landing",
+    "description": ""
+  },
+  {
+    "repoName": "blog-application",
+    "description": "The development of Blog Application was a technical journey focused on mastering CSS. I architected the solution to handle complex data flows while ensuring performance and scalability remained top priorities.",
+    "demoUrl": "https://blog-application-gamma-seven.vercel.app"
+  },
+  {
+    "repoName": "Blog-Application",
+    "description": "With Blog Application, I dived deep into the intricacies of CSS development. The project involved solving critical technical hurdles through iterative prototyping and rigorous testing of core functionalities."
+  },
+  {
+    "repoName": "E-commerce",
+    "description": "Building E Commerce challenged me to push the boundaries of TypeScript. I focused on creating a robust system that integrates modern design patterns with efficient backend logic, resulting in a seamless user experience.",
+    "demoUrl": "https://ecommercequickserve.vercel.app"
+  }
+]
