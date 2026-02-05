@@ -4,9 +4,11 @@ import { join } from "path";
 const KV_KEY = "portfolio:approved-projects";
 const FILE_PATH = join(process.cwd(), "approved-projects.json");
 
+let redisClientPromise;
+
 function normalizeKvEnv() {
-  // New Vercel Redis integrations often provide UPSTASH_* vars.
-  // @vercel/kv expects KV_* vars. Map them if needed.
+  // Only map REST-based Upstash variables.
+  // NOTE: A generic `REDIS_URL=redis://...` is NOT compatible with @vercel/kv.
   if (!process.env.KV_REST_API_URL && process.env.UPSTASH_REDIS_REST_URL) {
     process.env.KV_REST_API_URL = process.env.UPSTASH_REDIS_REST_URL;
   }
@@ -19,7 +21,8 @@ function normalizeKvEnv() {
     !process.env.KV_REST_API_READ_ONLY_TOKEN &&
     process.env.UPSTASH_REDIS_REST_TOKEN
   ) {
-    process.env.KV_REST_API_READ_ONLY_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+    process.env.KV_REST_API_READ_ONLY_TOKEN =
+      process.env.UPSTASH_REDIS_REST_TOKEN;
   }
 }
 
@@ -29,22 +32,47 @@ async function getKvClient() {
   return mod.kv;
 }
 
+async function getRedisClient() {
+  if (!process.env.REDIS_URL) {
+    throw new Error("Missing REDIS_URL");
+  }
+
+  if (!redisClientPromise) {
+    redisClientPromise = (async () => {
+      const { createClient } = await import("redis");
+      const client = createClient({ url: process.env.REDIS_URL });
+      client.on("error", (err) => {
+        console.error("Redis client error:", err);
+      });
+      await client.connect();
+      return client;
+    })();
+  }
+
+  return redisClientPromise;
+}
+
 function hasKvRead() {
+  normalizeKvEnv();
   return (
-    (!!process.env.KV_REST_API_URL || !!process.env.UPSTASH_REDIS_REST_URL) &&
+    !!process.env.KV_REST_API_URL &&
     (
       !!process.env.KV_REST_API_READ_ONLY_TOKEN ||
-      !!process.env.KV_REST_API_TOKEN ||
-      !!process.env.UPSTASH_REDIS_REST_TOKEN
+      !!process.env.KV_REST_API_TOKEN
     )
   );
 }
 
 function hasKvWrite() {
+  normalizeKvEnv();
   return (
-    (!!process.env.KV_REST_API_URL || !!process.env.UPSTASH_REDIS_REST_URL) &&
-    (!!process.env.KV_REST_API_TOKEN || !!process.env.UPSTASH_REDIS_REST_TOKEN)
+    !!process.env.KV_REST_API_URL &&
+    !!process.env.KV_REST_API_TOKEN
   );
+}
+
+function hasRedisUrl() {
+  return !!process.env.REDIS_URL;
 }
 
 function isProductionRuntime() {
@@ -72,6 +100,21 @@ async function writeToFile(list) {
 }
 
 export async function loadApprovedProjects() {
+  // If a standard REDIS_URL is provided (redis://...), use it.
+  // This is common with non-Upstash Redis providers.
+  if (hasRedisUrl()) {
+    try {
+      const client = await getRedisClient();
+      const value = await client.get(KV_KEY);
+      if (!value) return [];
+      const parsed = JSON.parse(value);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Error loading approved projects from Redis:", error);
+      return await readFromFile();
+    }
+  }
+
   // Prefer KV in production so approvals persist across deployments.
   if (hasKvRead()) {
     try {
@@ -113,6 +156,23 @@ export async function loadApprovedProjects() {
 export async function saveApprovedProjects(list) {
   if (!Array.isArray(list)) {
     throw new Error("saveApprovedProjects expected an array");
+  }
+
+  // If a standard REDIS_URL is provided, write there.
+  if (hasRedisUrl()) {
+    try {
+      const client = await getRedisClient();
+      await client.set(KV_KEY, JSON.stringify(list));
+      return true;
+    } catch (error) {
+      console.error("Error saving approved projects to Redis:", error);
+      if (isProductionRuntime()) {
+        throw new Error(
+          "Redis write failed. Verify REDIS_URL is set correctly in Vercel (Production) and redeploy."
+        );
+      }
+      return await writeToFile(list);
+    }
   }
 
   // In serverless production, filesystem writes are not reliable.

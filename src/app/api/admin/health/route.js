@@ -12,13 +12,37 @@ export async function GET(request) {
     return Response.json({ success: false, error: "Unauthorized" }, { status: 401 });
   }
 
-  const hasKvUrl = bool(process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL);
+  const anyRedisUrl =
+    process.env.KV_REST_API_URL ||
+    process.env.UPSTASH_REDIS_REST_URL ||
+    process.env.UPSTASH_REDIS_URL ||
+    process.env.REDIS_REST_URL ||
+    process.env.REDIS_URL;
+
+  const anyRedisToken =
+    process.env.KV_REST_API_TOKEN ||
+    process.env.KV_REST_API_READ_ONLY_TOKEN ||
+    process.env.UPSTASH_REDIS_REST_TOKEN ||
+    process.env.UPSTASH_REDIS_TOKEN ||
+    process.env.REDIS_REST_TOKEN ||
+    process.env.REDIS_TOKEN;
+
+  const hasKvUrl = bool(anyRedisUrl);
   const hasKvReadToken = bool(
     process.env.KV_REST_API_READ_ONLY_TOKEN ||
       process.env.KV_REST_API_TOKEN ||
-      process.env.UPSTASH_REDIS_REST_TOKEN
+      process.env.UPSTASH_REDIS_REST_TOKEN ||
+      process.env.UPSTASH_REDIS_TOKEN ||
+      process.env.REDIS_REST_TOKEN ||
+      process.env.REDIS_TOKEN
   );
-  const hasKvWriteToken = bool(process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN);
+  const hasKvWriteToken = bool(
+    process.env.KV_REST_API_TOKEN ||
+      process.env.UPSTASH_REDIS_REST_TOKEN ||
+      process.env.UPSTASH_REDIS_TOKEN ||
+      process.env.REDIS_REST_TOKEN ||
+      process.env.REDIS_TOKEN
+  );
 
   return Response.json({
     success: true,
@@ -36,9 +60,17 @@ export async function GET(request) {
       canWrite: hasKvUrl && hasKvWriteToken,
       provider: process.env.KV_REST_API_URL
         ? "vercel-kv"
-        : process.env.UPSTASH_REDIS_REST_URL
+        : (process.env.UPSTASH_REDIS_REST_URL || process.env.UPSTASH_REDIS_URL)
           ? "upstash"
+          : process.env.REDIS_URL
+            ? "redis-url"
+            : process.env.REDIS_REST_URL
+              ? "redis-rest"
           : "none",
+      debug: {
+        hasAnyUrl: bool(anyRedisUrl),
+        hasAnyToken: bool(anyRedisToken),
+      },
     },
   });
 }
