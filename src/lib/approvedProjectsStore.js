@@ -47,6 +47,10 @@ function hasKvWrite() {
   );
 }
 
+function isProductionRuntime() {
+  return process.env.NODE_ENV === "production" || !!process.env.VERCEL;
+}
+
 async function readFromFile() {
   try {
     const data = await fs.readFile(FILE_PATH, "utf-8");
@@ -111,6 +115,14 @@ export async function saveApprovedProjects(list) {
     throw new Error("saveApprovedProjects expected an array");
   }
 
+  // In serverless production, filesystem writes are not reliable.
+  // If KV is configured only for reads, fail loudly with a clear message.
+  if (hasKvRead() && !hasKvWrite() && isProductionRuntime()) {
+    throw new Error(
+      "KV/Redis is configured read-only. Set KV_REST_API_TOKEN (or UPSTASH_REDIS_REST_TOKEN) for write access."
+    );
+  }
+
   if (hasKvWrite()) {
     try {
       const kv = await getKvClient();
@@ -118,7 +130,15 @@ export async function saveApprovedProjects(list) {
       return true;
     } catch (error) {
       console.error("Error saving approved projects to KV:", error);
-      // If KV write fails, still attempt file write for local/dev.
+
+      // In production, don't pretend filesystem persistence will work.
+      if (isProductionRuntime()) {
+        throw new Error(
+          "KV/Redis write failed. Verify your KV/Upstash URL+token and that the Storage is connected to this Vercel project."
+        );
+      }
+
+      // Local/dev fallback.
       return await writeToFile(list);
     }
   }

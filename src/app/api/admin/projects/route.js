@@ -181,18 +181,7 @@ export async function POST(request) {
     }
 
     if (updated) {
-      const saved = await saveApprovedProjects(approvedList);
-
-      if (!saved) {
-        return Response.json(
-          {
-            success: false,
-            error:
-              "Failed to persist changes. Check your KV/Redis env vars (write token) and redeploy.",
-          },
-          { status: 500 }
-        );
-      }
+      await saveApprovedProjects(approvedList);
 
       const actionLabel = action === "approve" ? "approved" : "disapproved";
       return Response.json({
