@@ -35,5 +35,10 @@
     "repoName": "E-commerce",
     "description": "Building E Commerce challenged me to push the boundaries of TypeScript. I focused on creating a robust system that integrates modern design patterns with efficient backend logic, resulting in a seamless user experience.",
     "demoUrl": "https://ecommercequickserve.vercel.app"
+  },
+  {
+    "repoName": "__smoke_test__",
+    "description": "test",
+    "demoUrl": ""
   }
 ]

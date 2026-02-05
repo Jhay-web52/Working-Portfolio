@@ -1,21 +1,14 @@
 "use client";
 import { useForm, ValidationError } from "@formspree/react";
-import { useState, useEffect, ChangeEventHandler } from "react";
+import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { HiMailOpen } from "react-icons/hi";
 import { FaXTwitter } from "react-icons/fa6";
 
-const Contact = () => {
-  const refHeading = useRef(null);
-  const inViewHeading = useInView(refHeading);
-  const refContent = useRef(null);
-  const inViewContent = useInView(refContent);
-
+const FormspreeContactForm = ({ formId }) => {
   const [show, setShow] = useState(false);
-  const formId = process.env.NEXT_PUBLIC_FORM_ID;
-
   const [state, handleSubmit] = useForm(formId);
   const [formData, setFormData] = useState({
     email: "",
@@ -23,10 +16,6 @@ const Contact = () => {
     message: "",
   });
 
-  const variants1 = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-  };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -41,6 +30,100 @@ const Contact = () => {
       });
     }
   }, [state.succeeded]);
+
+  // after form submission greetings
+  if (show) {
+    return (
+      <div className="mx-auto mt-8 flex max-w-md items-center lg:max-w-lg">
+        <p className="text-md text-textPara">
+          Thank you for reaching out! <br /> I appreciate your interest and
+          will get back to you as soon as possible. In the meantime, feel free
+          to explore more of my portfolio.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="flex flex-col" onSubmit={handleSubmit}>
+      <div className="mb-6">
+        <label
+          htmlFor="email"
+          className="mb-2 block text-sm font-medium text-white"
+        >
+          Your email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
+          placeholder="joeloguntade256@gmail.com"
+        />
+        <ValidationError prefix="Email" field="email" errors={state.errors} />
+      </div>
+      <div className="mb-6">
+        <label
+          htmlFor="subject"
+          className="mb-2 block text-sm font-medium text-white"
+        >
+          Subject
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          value={formData.subject}
+          onChange={handleChange}
+          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
+          placeholder="Just saying hi"
+        />
+        <ValidationError prefix="Subject" field="subject" errors={state.errors} />
+      </div>
+      <div className="mb-6">
+        <label
+          htmlFor="message"
+          className="mb-2 block text-sm font-medium text-white"
+        >
+          Message
+        </label>
+        <textarea
+          name="message"
+          id="message"
+          value={formData.message}
+          onChange={handleChange}
+          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
+          placeholder="Let's talk about..."
+        />
+        <ValidationError prefix="Message" field="message" errors={state.errors} />
+      </div>
+      <button
+        type="submit"
+        disabled={state.submitting}
+        className="mr-4 w-full rounded-full border-2 border-white bg-transparent px-5 py-2.5 text-center text-sm font-medium text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover"
+      >
+        Send Message
+      </button>
+    </form>
+  );
+};
+
+const Contact = () => {
+  const refHeading = useRef(null);
+  const inViewHeading = useInView(refHeading);
+  const refContent = useRef(null);
+  const inViewContent = useInView(refContent);
+
+  const formId = process.env.NEXT_PUBLIC_FORM_ID;
+
+  const variants1 = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+  };
 
   return (
     <section className="sm:px-6 sm:pt-[80px]" id="contact">
@@ -118,92 +201,15 @@ const Contact = () => {
           transition={{ duration: 1 }}
           className="mt-10 w-full p-4 md:mt-0 md:w-[40%]"
         >
-          {/* after form submission greetings */}
-          {show ? (
-            <div className="mx-auto mt-8 flex max-w-md items-center lg:max-w-lg">
+          {formId ? (
+            <FormspreeContactForm formId={formId} />
+          ) : (
+            <div className="mx-auto mt-2 flex max-w-md items-center lg:max-w-lg">
               <p className="text-md text-textPara">
-                Thank you for reaching out! <br /> I appreciate your interest
-                and will get back to you as soon as possible. In the meantime,
-                feel free to explore more of my portfolio.
+                The contact form is not configured right now. You can still
+                reach me via email using the button on the left.
               </p>
             </div>
-          ) : (
-            <form className="flex flex-col" onSubmit={handleSubmit}>
-              <div className="mb-6">
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-medium text-white"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
-                  placeholder="joeloguntade256@gmail.com"
-                />
-                <ValidationError
-                  prefix="Email"
-                  field="email"
-                  errors={state.errors}
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  htmlFor="subject"
-                  className="mb-2 block text-sm font-medium text-white"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
-                  placeholder="Just saying hi"
-                />
-                <ValidationError
-                  prefix="Subject"
-                  field="subject"
-                  errors={state.errors}
-                />
-              </div>
-              <div className="mb-6">
-                <label
-                  htmlFor="message"
-                  className="mb-2 block text-sm font-medium text-white"
-                >
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
-                  placeholder="Let's talk about..."
-                />
-                <ValidationError
-                  prefix="Message"
-                  field="message"
-                  errors={state.errors}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={state.submitting}
-                className="mr-4 w-full rounded-full border-2 border-white bg-transparent px-5 py-2.5 text-center text-sm font-medium text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover"
-              >
-                Send Message
-              </button>
-            </form>
           )}
         </motion.div>
       </div>

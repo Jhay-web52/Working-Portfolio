@@ -25,6 +25,13 @@ const AdminProjects = () => {
         credentials: "include",
         cache: "no-store",
       });
+
+      if (response.status === 401) {
+        setError("Session expired or not logged in. Refresh and log in again.");
+        setProjects([]);
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success) {
@@ -67,6 +74,7 @@ const AdminProjects = () => {
   const handleToggleApproval = async (repoName, isCurrentlyApproved, customDescription, demoUrl, forceUpdate = false) => {
     const action = (isCurrentlyApproved && !forceUpdate) ? "disapprove" : "approve";
     setSavingId(repoName);
+    setError(null);
 
     try {
       const response = await fetch("/api/admin/projects", {
@@ -83,6 +91,11 @@ const AdminProjects = () => {
         }),
       });
 
+      if (response.status === 401) {
+        setError("Unauthorized. Please refresh and log in again.");
+        return;
+      }
+
       const data = await response.json();
       if (data.success) {
         setProjects(prev => prev.map(p => 
@@ -90,9 +103,12 @@ const AdminProjects = () => {
         ));
         
         // Brief success feedback could be added here if needed
+      } else {
+        setError(data.error || "Update failed. Please try again.");
       }
     } catch (err) {
       console.error("Failed to toggle approval:", err);
+      setError("Update failed. Please try again.");
     } finally {
       setSavingId(null);
     }
