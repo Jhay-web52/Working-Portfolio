@@ -5,7 +5,7 @@ import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
-import picture from "@/assets/picture.jpeg";
+import picture from "@/assets/IMG_2099.jpeg";
 import { FaDownload, FaArrowRight } from "react-icons/fa";
 
 /* Floating animation (desktop only) */

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "@mui/icons-material";
-import picture from "@/assets/picture.jpeg";
+import picture from "@/assets/IMG_2099.jpeg";
 
 const About = () => {
   const refHeading = useRef(null);
