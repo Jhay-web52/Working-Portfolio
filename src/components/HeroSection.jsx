@@ -172,14 +172,50 @@ export default function HeroSection() {
           animate={isDesktop ? "animate" : undefined}
           className="relative"
         >
-          <Image
-            src={picture}
-            alt="Joel Oguntade"
-            width={320}
-            height={320}
-            className="rounded-full object-cover shadow-[0_0_60px_rgba(59,130,246,0.7)] sm:w-[360px]"
-            priority
-          />
+          <div className="relative">
+            <Image
+              src={picture}
+              alt="Joel Oguntade"
+              width={320}
+              height={320}
+              className="rounded-full object-cover shadow-[0_0_60px_rgba(59,130,246,0.7)] sm:w-[360px]"
+              priority
+            />
+
+            {/* Floating tech badges (desktop only) */}
+            {isDesktop && (
+              <>
+                <motion.span
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-3 -left-12 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                >
+                  React.js
+                </motion.span>
+                <motion.span
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-6 -right-8 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                >
+                  Next.js
+                </motion.span>
+                <motion.span
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -bottom-2 -left-10 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                >
+                  Vue.js
+                </motion.span>
+                <motion.span
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -bottom-4 right-0 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                >
+                  TypeScript
+                </motion.span>
+              </>
+            )}
+          </div>
         </motion.div>
       </div>
     </section>

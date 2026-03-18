@@ -6,11 +6,13 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { SiEbox } from "react-icons/si";
 import { MenuItems } from "../constants/MenuItem";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Navbar = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
   const [mobileView, setMobileView] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -37,7 +39,7 @@ const Navbar = () => {
         backdropFilter: scrolled ? "blur(20px)" : "blur(0px)",
       }}
       transition={{ duration: 0.35, ease: "easeOut" }}
-      className="sticky left-0 top-0 z-[100] w-full"
+      className="relative sticky left-0 top-0 z-[100] w-full"
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -165,6 +167,10 @@ const Navbar = () => {
           </a>
         </div>
       </motion.div>
+      <motion.div
+        style={{ scaleX, transformOrigin: "left" }}
+        className="absolute bottom-0 left-0 h-[2px] w-full bg-blue-500"
+      />
     </motion.nav>
   );
 };

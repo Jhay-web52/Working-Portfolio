@@ -12,7 +12,7 @@ const SkillCard = ({ title, skills }) => {
             key={i}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: i / 10 }}
           >
             <SkillCardBlock icon={skill.icon} name={skill.name} />

@@ -36,6 +36,7 @@ import {
 } from "devicons-react";
 import { FaGithub } from "react-icons/fa";
 import { SiShadcnui } from "react-icons/si";
+import { motion } from "framer-motion";
 import skill from "@/assets/skill.png";
 import Image from "next/image";
 
@@ -183,22 +184,28 @@ const SkillCardBlock = ({ icon, name }) => {
   }
 
   return (
-    <div className="flex cursor-pointer flex-row items-center justify-evenly gap-3 rounded-md px-4 py-3 transition-all duration-150 ease-in-out hover:bg-gray-800 md:gap-4">
-      {IconComponent ? (
-        <div>
-          <IconComponent className="scale-[150%]" />
-        </div>
-      ) : (
-        <Image
-          src={skill}
-          alt="skill"
-          width={20}
-          height={20}
-          className="-mr-1"
-        />
-      )}
-      <div className="text-sm sm:text-base">{name}</div>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.08, backgroundColor: "rgba(59,130,246,0.08)" }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="rounded-md"
+    >
+      <div className="flex cursor-pointer flex-row items-center justify-evenly gap-3 rounded-md px-4 py-3 transition-all duration-150 ease-in-out hover:bg-gray-800 md:gap-4">
+        {IconComponent ? (
+          <div>
+            <IconComponent className="scale-[150%]" />
+          </div>
+        ) : (
+          <Image
+            src={skill}
+            alt="skill"
+            width={20}
+            height={20}
+            className="-mr-1"
+          />
+        )}
+        <div className="text-sm sm:text-base">{name}</div>
+      </div>
+    </motion.div>
   );
 };
 
