@@ -31,6 +31,8 @@ import {
   FirebaseOriginal,
   VuejsOriginal,
   NuxtjsOriginal,
+  PhpOriginal,
+  PostgresqlOriginal,
 } from "devicons-react";
 import { FaGithub } from "react-icons/fa";
 import { SiShadcnui } from "react-icons/si";
@@ -166,6 +168,15 @@ const SkillCardBlock = ({ icon, name }) => {
       break;
     case "NuxtOriginal":
       IconComponent = NuxtjsOriginal;
+      break;
+    case "PhpOriginal":
+      IconComponent = PhpOriginal;
+      break;
+    case "PostgresqlOriginal":
+      IconComponent = PostgresqlOriginal;
+      break;
+    case "MysqlOriginal":
+      IconComponent = MysqlOriginal;
       break;
     default:
       break;

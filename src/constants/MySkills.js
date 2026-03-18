@@ -18,6 +18,10 @@ export const MySkills = [
         name: "CSS",
         icon: "Css3Original",
       },
+      {
+        name: "PHP",
+        icon: "PhpOriginal",
+      },
     ],
     index: 1,
   },
@@ -49,6 +53,21 @@ export const MySkills = [
   },
 
   {
+    title: "Databases",
+    skills: [
+      {
+        name: "MySQL",
+        icon: "MysqlOriginal",
+      },
+      {
+        name: "PostgreSQL",
+        icon: "PostgresqlOriginal",
+      },
+    ],
+    index: 3,
+  },
+
+  {
     title: "Tools & Version Control",
     skills: [
       {
@@ -68,6 +87,6 @@ export const MySkills = [
         icon: "PostmanOriginal",
       },
     ],
-    index: 3,
+    index: 4,
   },
 ];

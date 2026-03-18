@@ -14,10 +14,13 @@ const CompaniesBar = ({ setDescriptionJob }) => {
       name: "Altschool Africa",
       job: "AltschoolExperience",
     },
+    {
+      name: "Trueminds Innovations Ltd",
+      job: "TruemindsExperience",
+    },
   ];
 
-  // 0% and 50% spacing (as you wanted)
-  const positions = ["0%", "50%"];
+  const positions = ["0%", "33%", "66%"];
 
   return (
     <div className="relative flex w-full lg:w-[350px] min-h-[260px]">
@@ -28,7 +31,7 @@ const CompaniesBar = ({ setDescriptionJob }) => {
 
         {/* Progress line */}
         <motion.div
-          animate={{ height: activeIndex === 0 ? "50%" : "100%" }}
+          animate={{ height: activeIndex === 0 ? "16%" : activeIndex === 1 ? "50%" : "100%" }}
           transition={{ duration: 0.5 }}
           className="absolute top-0 w-[2px] bg-blue-500"
         />

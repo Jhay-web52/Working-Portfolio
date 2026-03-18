@@ -48,24 +48,33 @@ async function fetchAllGitHubProjects() {
   }
 
   const repos = await reposResponse.json();
+  const filtered = repos.filter((repo) => !repo.archived);
 
-  return repos
-    .filter((repo) => !repo.archived)
-    .map((repo) => ({
-      id: repo.id,
-      name: repo.name
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" "),
-      repoName: repo.name,
-      description: repo.description || "No description",
-      language: repo.language || "No language specified",
-      private: repo.private,
-      stars: repo.stargazers_count,
-      url: repo.html_url,
-      homepage: repo.homepage || "",
-      approved: false,
-    }));
+  // Fetch all languages for each repo in parallel
+  const languagesResults = await Promise.all(
+    filtered.map((repo) =>
+      fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`, { headers, cache: "no-store" })
+        .then((r) => r.ok ? r.json() : {})
+        .catch(() => ({}))
+    )
+  );
+
+  return filtered.map((repo, i) => ({
+    id: repo.id,
+    name: repo.name
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    repoName: repo.name,
+    description: repo.description || "No description",
+    language: repo.language || "No language specified",
+    languages: Object.keys(languagesResults[i]),
+    private: repo.private,
+    stars: repo.stargazers_count,
+    url: repo.html_url,
+    homepage: repo.homepage || "",
+    approved: false,
+  }));
 }
 
 export async function GET(request) {

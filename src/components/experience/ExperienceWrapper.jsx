@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import CompaniesBar from "./CompaniesBar";
 import JhayfxExperience from "./JhayfxExperience";
 import Altschool from "./Altschool";
+import TruemindsExperience from "./TruemindsExperience";
 const ExperienceWrapper = () => {
   const [DescriptionJob, setDescriptionJob] = useState("JhayfxExperience");
 
@@ -12,6 +13,8 @@ const ExperienceWrapper = () => {
         return <JhayfxExperience />;
       case "AltschoolExperience":
         return <Altschool />;
+      case "TruemindsExperience":
+        return <TruemindsExperience />;
       default:
         return null;
     }
@@ -25,6 +28,10 @@ const ExperienceWrapper = () => {
     {
       name: "Altschool Africa",
       job: "AltschoolExperience",
+    },
+    {
+      name: "Trueminds Innovations Ltd",
+      job: "TruemindsExperience",
     },
   ];
 
