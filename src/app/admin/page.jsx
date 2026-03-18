@@ -12,17 +12,23 @@ export default function AdminPage() {
   useEffect(() => {
     // Best-effort session check: try hitting the admin API.
     // If cookie is present and valid, it will succeed.
+    // AbortController ensures we never hang forever if the server is slow.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+
     (async () => {
       try {
         const res = await fetch("/api/admin/projects", {
           method: "GET",
           credentials: "include",
           cache: "no-store",
+          signal: controller.signal,
         });
         setIsAuthenticated(res.ok);
       } catch {
         setIsAuthenticated(false);
       } finally {
+        clearTimeout(timer);
         setCheckingSession(false);
       }
     })();

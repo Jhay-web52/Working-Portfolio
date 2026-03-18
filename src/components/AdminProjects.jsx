@@ -257,12 +257,13 @@ const AdminProjects = () => {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-4 mt-4 text-xs text-slate-500">
-                    <span className="flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                      {project.language}
-                    </span>
+                    {project.language && (
+                      <span className="px-3 py-1 bg-blue-500/15 border border-blue-500/30 text-blue-300 rounded-full text-xs font-semibold tracking-wide">
+                        {project.language}
+                      </span>
+                    )}
                     <span>⭐ {project.stars}</span>
-                    <button 
+                    <button
                       onClick={() => generateTechJourney(project)}
                       className="text-blue-400 hover:text-blue-300 transition-colors font-medium flex items-center gap-1"
                     >

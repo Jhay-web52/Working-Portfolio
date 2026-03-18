@@ -29,6 +29,8 @@ import {
   DartOriginal,
   FlutterOriginal,
   FirebaseOriginal,
+  VuejsOriginal,
+  NuxtjsOriginal,
 } from "devicons-react";
 import { FaGithub } from "react-icons/fa";
 import { SiShadcnui } from "react-icons/si";
@@ -158,6 +160,12 @@ const SkillCardBlock = ({ icon, name }) => {
     //   break;
     case "FirebaseOriginal":
       IconComponent = FirebaseOriginal;
+      break;
+    case "VueOriginal":
+      IconComponent = VuejsOriginal;
+      break;
+    case "NuxtOriginal":
+      IconComponent = NuxtjsOriginal;
       break;
     default:
       break;

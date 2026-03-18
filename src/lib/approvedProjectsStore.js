@@ -28,8 +28,11 @@ function normalizeKvEnv() {
 
 async function getKvClient() {
   normalizeKvEnv();
-  const mod = await import("@vercel/kv");
-  return mod.kv;
+  const { Redis } = await import("@upstash/redis");
+  return new Redis({
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN || process.env.KV_REST_API_READ_ONLY_TOKEN,
+  });
 }
 
 async function getRedisClient() {
