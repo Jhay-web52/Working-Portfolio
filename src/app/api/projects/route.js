@@ -86,49 +86,54 @@ async function fetchGitHubProjects(limit, approvedItems) {
   }
 
   const repos = await reposResponse.json();
+  const filtered = repos.filter((repo) => !repo.archived).slice(0, limit);
 
-  return repos
-    .filter((repo) => !repo.archived)
-    .slice(0, limit)
-    .map((repo) => {
-      // Find custom info from approved list (case-insensitive)
-      // We look for the best match (favoring entries with descriptions)
-      const allMatches = approvedItems.filter(item => {
-        const itemRepoName = typeof item === 'string' ? item : item.repoName;
-        return itemRepoName && itemRepoName.toLowerCase() === repo.name.toLowerCase();
-      });
-      
-      const approvedEntry = allMatches.find(m => typeof m === 'object' && m.description) || allMatches[0];
-      
-      const customDesc = typeof approvedEntry === 'object' ? approvedEntry.description : null;
-      const customDemo = typeof approvedEntry === 'object' ? approvedEntry.demoUrl : null;
-      const demoUrl = pickDemoUrl(customDemo, repo.homepage);
+  // Fetch all languages for each repo in parallel
+  const languagesResults = await Promise.all(
+    filtered.map((repo) =>
+      fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/languages`, { headers, cache: "no-store" })
+        .then((r) => r.ok ? r.json() : {})
+        .catch(() => ({}))
+    )
+  );
 
-      return {
-        id: repo.id,
-        name: repo.name
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" "),
-        repoName: repo.name,
-        description: customDesc ? [customDesc] : [
-          repo.description || `A project by ${GITHUB_USERNAME}`,
-          `Built with modern technologies and best practices. Language: ${
-            repo.language || "Multi-language"
-          }`,
-          `Stars: ${repo.stargazers_count} | Watchers: ${repo.watchers_count} | Forks: ${repo.forks_count}`,
-        ],
-        img: getProjectImage(repo.name, demoUrl, repo.full_name),
-        tech: repo.language ? [repo.language] : ["JavaScript"],
-        category: repo.topics?.length > 0 ? repo.topics[0] : "Development",
-        source: repo.html_url,
-        // Only expose a Live Demo when we have a real website URL.
-        demo: demoUrl,
-        featured: repo.stargazers_count > 5,
-        year: new Date(repo.created_at).getFullYear(),
-        source_type: "GitHub",
-      };
+  return filtered.map((repo, i) => {
+    const allMatches = approvedItems.filter(item => {
+      const itemRepoName = typeof item === 'string' ? item : item.repoName;
+      return itemRepoName && itemRepoName.toLowerCase() === repo.name.toLowerCase();
     });
+
+    const approvedEntry = allMatches.find(m => typeof m === 'object' && m.description) || allMatches[0];
+
+    const customDesc = typeof approvedEntry === 'object' ? approvedEntry.description : null;
+    const customDemo = typeof approvedEntry === 'object' ? approvedEntry.demoUrl : null;
+    const demoUrl = pickDemoUrl(customDemo, repo.homepage);
+
+    const allLanguages = Object.keys(languagesResults[i]);
+    const tech = allLanguages.length > 0 ? allLanguages : (repo.language ? [repo.language] : ["JavaScript"]);
+
+    return {
+      id: repo.id,
+      name: repo.name
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      repoName: repo.name,
+      description: customDesc ? [customDesc] : [
+        repo.description || `A project by ${GITHUB_USERNAME}`,
+        `Built with modern technologies and best practices.`,
+        `Stars: ${repo.stargazers_count} | Watchers: ${repo.watchers_count} | Forks: ${repo.forks_count}`,
+      ],
+      img: getProjectImage(repo.name, demoUrl, repo.full_name),
+      tech,
+      category: repo.topics?.length > 0 ? repo.topics[0] : "Development",
+      source: repo.html_url,
+      demo: demoUrl,
+      featured: repo.stargazers_count > 5,
+      year: new Date(repo.created_at).getFullYear(),
+      source_type: "GitHub",
+    };
+  });
 }
 
 export async function GET(request) {
