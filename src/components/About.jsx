@@ -67,18 +67,24 @@ const About = () => {
             I&apos;m{" "}
             <span className="font-semibold text-heading">Joel Oguntade</span>, a
             Full Stack Developer who builds complete web applications from the
-            UI down to the database. I enjoy working across the entire product
-            — crafting responsive interfaces, wiring up APIs, and structuring
-            data in a way that actually scales.
+            UI down to the database. My journey into web development began at{" "}
+            <span className="font-medium text-gray-200">AltSchool Africa</span>,
+            where I graduated as a Frontend Engineer. That experience sparked a
+            genuine passion for crafting user interfaces and building products
+            that people actually enjoy using. I later furthered my academic
+            background by studying Computing as a postgraduate student at the{" "}
+            <span className="font-medium text-gray-200">University of Sunderland</span>,
+            which deepened my understanding of software systems, problem solving,
+            and engineering principles at a broader level.
           </p>
           <p className="text-sm leading-relaxed text-gray-400">
-            Right now I&apos;m deep in building{" "}
-            <span className="font-medium text-gray-300">FlashPromote</span> — a
-            full stack influencer marketing SaaS that connects brands with
-            creators. It&apos;s built with React, TypeScript, Supabase
-            (PostgreSQL + Auth + Storage), Stripe payments, and Resend for
-            email — covering everything from campaign management and real-time
-            workspaces to creator marketplaces and payment flows.
+            On the personal project side, I am currently building{" "}
+            <span className="font-medium text-gray-300">FlashPromote</span>, a
+            full stack influencer marketing SaaS platform that connects brands
+            with creators. The platform is built with React, TypeScript, Supabase,
+            Stripe, and Resend, covering everything from campaign management and
+            creator marketplaces to real-time workspaces and end-to-end payment
+            flows.
           </p>
 
         </motion.div>
