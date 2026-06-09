@@ -38,7 +38,7 @@ export default function ADDigitech() {
               <span>Altschool Africa</span>
 
               {/* Date */}
-              <span>2025 – Present</span>
+              <span>March 2025 – March 2026</span>
             </div>
           </div>
 

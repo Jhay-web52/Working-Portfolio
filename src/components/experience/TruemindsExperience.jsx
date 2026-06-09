@@ -41,7 +41,7 @@ export default function TruemindsExperience() {
               <span>Trueminds Innovations Ltd</span>
 
               {/* Date */}
-              <span>2026</span>
+              <span>February 2026 – April 2026</span>
             </div>
           </div>
 
