@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import picture from "@/assets/IMG_2099.jpeg";
-import { FaDownload, FaArrowRight } from "react-icons/fa";
+import { FaDownload, FaArrowRight, FaCertificate } from "react-icons/fa";
 
 /* Floating animation (desktop only) */
 const floating = {
@@ -162,6 +162,19 @@ export default function HeroSection() {
             >
               Download CV
               <FaDownload />
+            </motion.a>
+
+            {/* View Certificate */}
+            <motion.a
+              href="/certificate.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.06, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-blue-400 px-8 py-3 font-medium text-blue-400 sm:w-auto"
+            >
+              View Certificate
+              <FaCertificate />
             </motion.a>
           </div>
         </motion.div>
