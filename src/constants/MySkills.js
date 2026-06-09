@@ -102,6 +102,10 @@ export const MySkills = [
         name: "Postman",
         icon: "PostmanOriginal",
       },
+      {
+        name: "REST API",
+        icon: "RestApi",
+      },
     ],
     index: 4,
   },
