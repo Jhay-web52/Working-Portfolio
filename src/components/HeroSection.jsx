@@ -106,14 +106,14 @@ export default function HeroSection() {
               Joel Oguntade
             </span>
             <br />
-            Frontend Developer
+            Full Stack Developer
           </h1>
 
           <TypeAnimation
             sequence={[
-              "Building premium UI with React & Vue.js",
+              "Building full stack apps with React & Next.js",
               1200,
-              "Crafting smooth, scalable frontend experiences",
+              "Crafting smooth, scalable web experiences",
               1200,
               "Turning ideas into production-ready code",
               1200,
@@ -124,9 +124,9 @@ export default function HeroSection() {
           />
 
           <p className="mx-auto mt-4 max-w-xl text-textPara lg:mx-0">
-            I build modern, high-performance web interfaces with React, Vue.js, and
-            Next.js. With a strong focus on clean code, responsive design, and
-            exceptional user experience.
+            I build modern, high-performance web applications with React, Next.js, and
+            Node.js. With a strong focus on clean code, responsive design, and
+            exceptional user experience end-to-end.
           </p>
 
           {/* ===== CTA BUTTONS ===== */}

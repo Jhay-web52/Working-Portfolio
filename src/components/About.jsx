@@ -15,13 +15,6 @@ const About = () => {
     animate: { opacity: 1, y: 0 },
   };
 
-  const highlights = [
-    { label: "Frontend", value: "React · Next.js · Vue · Nuxt" },
-    { label: "Languages", value: "JavaScript · TypeScript · PHP" },
-    { label: "Databases", value: "MySQL · PostgreSQL" },
-    { label: "Styling", value: "Tailwind CSS · CSS3" },
-    { label: "Tools", value: "Git · Figma · Postman" },
-  ];
 
   return (
     <section className="py-[80px] sm:px-6" id="about">
@@ -73,33 +66,20 @@ const About = () => {
           <p className="text-base leading-relaxed text-gray-300 sm:text-lg">
             I&apos;m{" "}
             <span className="font-semibold text-heading">Joel Oguntade</span>, a
-            Frontend Developer focused on building fast, accessible, and
-            visually polished web experiences. I work across the full frontend
-            stack — from interactive UIs to backend-connected features — with a
-            commitment to clean code and thoughtful design.
+            Full Stack Developer who builds complete web applications from the
+            UI down to the database. I enjoy working across the entire product
+            — crafting responsive interfaces, wiring up APIs, and structuring
+            data in a way that actually scales.
           </p>
           <p className="text-sm leading-relaxed text-gray-400">
-            I&apos;ve contributed to production projects in both startup and
-            training environments, and I&apos;m always looking to expand my
-            depth — currently deepening my knowledge in backend development,
-            databases, and system design.
+            Right now I&apos;m deep in building{" "}
+            <span className="font-medium text-gray-300">FlashPromote</span> — a
+            full stack influencer marketing SaaS that connects brands with
+            creators. It&apos;s built with React, TypeScript, Supabase
+            (PostgreSQL + Auth + Storage), Stripe payments, and Resend for
+            email — covering everything from campaign management and real-time
+            workspaces to creator marketplaces and payment flows.
           </p>
-
-          {/* Tech highlights */}
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {highlights.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-start gap-3 rounded-lg border border-white/5 bg-white/[0.03] px-4 py-3"
-              >
-                <span className="mt-0.5 h-2 w-2 flex-none rounded-full bg-blue-500" />
-                <div className="text-sm">
-                  <span className="font-semibold text-heading">{item.label}: </span>
-                  <span className="text-gray-400">{item.value}</span>
-                </div>
-              </div>
-            ))}
-          </div>
 
         </motion.div>
       </div>

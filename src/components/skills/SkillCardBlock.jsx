@@ -33,9 +33,12 @@ import {
   NuxtjsOriginal,
   PhpOriginal,
   PostgresqlOriginal,
+  SupabaseOriginal,
+  VercelOriginal,
+  ViteOriginal,
 } from "devicons-react";
 import { FaGithub } from "react-icons/fa";
-import { SiShadcnui } from "react-icons/si";
+import { SiShadcnui, SiStripe } from "react-icons/si";
 import { motion } from "framer-motion";
 import skill from "@/assets/skill.png";
 import Image from "next/image";
@@ -178,6 +181,18 @@ const SkillCardBlock = ({ icon, name }) => {
       break;
     case "MysqlOriginal":
       IconComponent = MysqlOriginal;
+      break;
+    case "SupabaseOriginal":
+      IconComponent = SupabaseOriginal;
+      break;
+    case "VercelOriginal":
+      IconComponent = VercelOriginal;
+      break;
+    case "ViteOriginal":
+      IconComponent = ViteOriginal;
+      break;
+    case "StripeOriginal":
+      IconComponent = SiStripe;
       break;
     default:
       break;

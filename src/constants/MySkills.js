@@ -48,12 +48,16 @@ export const MySkills = [
         name: "Tailwind CSS",
         icon: "TailwindcssOriginal",
       },
+      {
+        name: "Vite",
+        icon: "ViteOriginal",
+      },
     ],
     index: 2,
   },
 
   {
-    title: "Databases",
+    title: "Databases & Backend",
     skills: [
       {
         name: "MySQL",
@@ -63,12 +67,16 @@ export const MySkills = [
         name: "PostgreSQL",
         icon: "PostgresqlOriginal",
       },
+      {
+        name: "Supabase",
+        icon: "SupabaseOriginal",
+      },
     ],
     index: 3,
   },
 
   {
-    title: "Tools & Version Control",
+    title: "Tools & Deployment",
     skills: [
       {
         name: "Git",
@@ -77,6 +85,14 @@ export const MySkills = [
       {
         name: "Github",
         icon: "GithubOriginal",
+      },
+      {
+        name: "Vercel",
+        icon: "VercelOriginal",
+      },
+      {
+        name: "Stripe",
+        icon: "StripeOriginal",
       },
       {
         name: "Figma",
