@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import picture from "@/assets/IMG_2099.jpeg";
-import { FaDownload, FaArrowRight, FaCertificate } from "react-icons/fa";
+import { FaDownload, FaArrowRight, FaCertificate, FaChevronDown, FaFileAlt } from "react-icons/fa";
 
 /* Floating animation (desktop only) */
 const floating = {
@@ -25,6 +25,13 @@ export default function HeroSection() {
   const smoothY = useSpring(mouseY, { stiffness: 80, damping: 18 });
 
   const [isDesktop, setIsDesktop] = useState(false);
+  const [certOpen, setCertOpen] = useState(false);
+
+  const certificates = [
+    { label: "AltSchool Africa Certificate", file: "/certificate.pdf" },
+    { label: "AltSchool Africa Transcript", file: "/transcript.pdf" },
+    { label: "Trueminds Innovations Certificate", file: "/trueminds-certificate.pdf" },
+  ];
 
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 1024);
@@ -164,18 +171,42 @@ export default function HeroSection() {
               <FaDownload />
             </motion.a>
 
-            {/* View Certificate */}
-            <motion.a
-              href="/certificate.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.06, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-blue-400 px-8 py-3 font-medium text-blue-400 sm:w-auto"
-            >
-              View Certificate
-              <FaCertificate />
-            </motion.a>
+            {/* View Certificates Dropdown */}
+            <div className="relative w-full sm:w-auto">
+              <motion.button
+                whileHover={{ scale: 1.06, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setCertOpen((v) => !v)}
+                className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-blue-400 px-8 py-3 font-medium text-blue-400 sm:w-auto"
+              >
+                <FaCertificate />
+                View Certificates
+                <FaChevronDown className={`transition-transform duration-200 ${certOpen ? "rotate-180" : ""}`} />
+              </motion.button>
+
+              {certOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  className="absolute left-0 z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:left-auto sm:right-0"
+                >
+                  {certificates.map((cert) => (
+                    <a
+                      key={cert.file}
+                      href={cert.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setCertOpen(false)}
+                      className="flex items-center gap-3 px-5 py-3 text-sm text-gray-300 transition-colors first:rounded-t-xl last:rounded-b-xl hover:bg-blue-500/10 hover:text-blue-400"
+                    >
+                      <FaFileAlt className="flex-none text-blue-400" />
+                      {cert.label}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </div>
           </div>
         </motion.div>
 
