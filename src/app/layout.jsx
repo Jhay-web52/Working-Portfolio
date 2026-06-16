@@ -18,8 +18,58 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Portfolio | Joel Oguntade",
-  description: "Joel Oguntade's portfolio site.",
+  metadataBase: new URL("https://joeloguntade.vercel.app"),
+  title: {
+    default: "Joel Oguntade | Full Stack Developer",
+    template: "%s | Joel Oguntade",
+  },
+  description:
+    "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
+  keywords: [
+    "Joel Oguntade",
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    "Supabase",
+    "Frontend Engineer",
+    "Web Developer UK",
+    "Portfolio",
+    "JavaScript Developer",
+  ],
+  authors: [{ name: "Joel Oguntade", url: "https://joeloguntade.vercel.app" }],
+  creator: "Joel Oguntade",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: "https://joeloguntade.vercel.app",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://joeloguntade.vercel.app",
+    title: "Joel Oguntade | Full Stack Developer",
+    description:
+      "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase. Building fast, accessible, and production-ready web applications.",
+    siteName: "Joel Oguntade Portfolio",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Joel Oguntade — Full Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Joel Oguntade | Full Stack Developer",
+    description:
+      "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }) {
