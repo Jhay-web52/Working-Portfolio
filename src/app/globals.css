@@ -16,6 +16,19 @@
   .text-balance {
     text-wrap: balance;
   }
+  .gradient-heading {
+    background: linear-gradient(90deg, #ffffff 0%, #60a5fa 35%, #a78bfa 65%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-sweep 5s linear infinite;
+  }
+}
+
+@keyframes gradient-sweep {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .scrollbar-hide {

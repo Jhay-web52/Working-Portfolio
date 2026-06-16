@@ -3,91 +3,134 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import picture from "@/assets/IMG_2099.jpeg";
+import { FaGraduationCap, FaCode } from "react-icons/fa";
+
+const BentoCard = ({ children, className = "", delay = 0 }) => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay }}
+      className={`rounded-2xl border border-white/10 bg-white/[0.03] p-5 ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 const About = () => {
   const refHeading = useRef(null);
-  const refContent = useRef(null);
   const inViewHeading = useInView(refHeading);
-  const inViewContent = useInView(refContent, { once: true });
-
-  const variants1 = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-  };
-
 
   return (
     <section className="py-[80px] sm:px-6" id="about">
       <motion.div
         ref={refHeading}
-        variants={variants1}
-        initial="initial"
-        animate={inViewHeading ? "animate" : "initial"}
+        initial={{ opacity: 0, y: 50 }}
+        animate={inViewHeading ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        <h3 className="text-3xl font-[800] text-textWhite sm:text-5xl">
-          About Me
-        </h3>
-        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-textWhite"></div>
+        <h3 className="gradient-heading text-3xl font-[800] sm:text-5xl">About Me</h3>
+        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent" />
       </motion.div>
 
-      <div className="mt-16 flex flex-col items-start justify-between gap-12 lg:flex-row">
-        {/* Photo */}
-        <motion.div
-          ref={refContent}
-          initial={{ opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }}
-          animate={
-            inViewContent
-              ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }
-              : { opacity: 0, y: 20, scale: 0.8, filter: "blur(10px)" }
-          }
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="flex-shrink-0 self-center lg:self-start"
-        >
-          <Image
-            src={picture}
-            alt="Joel Oguntade"
-            width={300}
-            height={400}
-            className="rounded-full object-cover shadow-[0_0_60px_rgba(59,130,246,0.7)] sm:w-[320px]"
-            priority
-          />
-        </motion.div>
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-        {/* Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inViewContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="flex flex-1 flex-col gap-6 xl:px-4"
-        >
-          {/* Bio */}
-          <p className="text-base leading-relaxed text-gray-300 sm:text-lg">
-            I&apos;m{" "}
-            <span className="font-semibold text-heading">Joel Oguntade</span>, a
-            Full Stack Developer who builds complete web applications from the
-            UI down to the database. My journey into web development began at{" "}
-            <span className="font-medium text-gray-200">AltSchool Africa</span>,
-            where I graduated as a Frontend Engineer. That experience sparked a
-            genuine passion for crafting user interfaces and building products
-            that people actually enjoy using. I later furthered my academic
-            background by studying Computing as a postgraduate student at the{" "}
-            <span className="font-medium text-gray-200">University of Sunderland</span>,
-            which deepened my understanding of software systems, problem solving,
-            and engineering principles at a broader level.
-          </p>
-          <p className="text-sm leading-relaxed text-gray-400">
-            On the personal project side, I am currently building{" "}
-            <span className="font-medium text-gray-300">FlashPromote</span>, a
-            full stack influencer marketing SaaS platform that connects brands
-            with creators. The platform is built with React, TypeScript, Supabase,
-            Stripe, and Resend, covering everything from campaign management and
-            creator marketplaces to real-time workspaces and end-to-end payment
-            flows.
-          </p>
+        {/* Bio card – 2 cols on lg */}
+        <BentoCard delay={0.1} className="lg:col-span-2">
+          <div className="flex items-start gap-4">
+            <Image
+              src={picture}
+              alt="Joel Oguntade"
+              width={72}
+              height={72}
+              className="rounded-full object-cover flex-shrink-0 w-16 h-16 sm:w-[72px] sm:h-[72px] shadow-[0_0_20px_rgba(59,130,246,0.5)]"
+              priority
+            />
+            <div>
+              <h4 className="text-lg font-bold text-white">Joel Oguntade</h4>
+              <p className="text-sm text-blue-400 mb-2">Full Stack Developer</p>
+              <p className="text-sm leading-relaxed text-gray-300">
+                I build complete web applications from the UI down to the database.
+                My journey began at{" "}
+                <span className="font-medium text-gray-100">AltSchool Africa</span>{" "}
+                where I graduated as a Frontend Engineer, then deepened my academic
+                background studying Computing at the{" "}
+                <span className="font-medium text-gray-100">University of Sunderland</span>.
+              </p>
+            </div>
+          </div>
+        </BentoCard>
 
-        </motion.div>
+        {/* Quick stats card */}
+        <BentoCard delay={0.15} className="flex flex-col justify-between gap-4">
+          <p className="text-xs text-gray-400 uppercase tracking-wider">At a glance</p>
+          {[
+            { value: "2+", label: "Years experience" },
+            { value: "10+", label: "Projects shipped" },
+            { value: "3", label: "Companies" },
+          ].map(({ value, label }) => (
+            <div key={label} className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-white">{value}</span>
+              <span className="text-xs text-gray-400">{label}</span>
+            </div>
+          ))}
+        </BentoCard>
+
+        {/* AltSchool card */}
+        <BentoCard delay={0.2} className="border-blue-500/20 bg-blue-500/[0.03]">
+          <div className="flex items-center gap-2 mb-3">
+            <FaGraduationCap className="text-blue-400" />
+            <span className="text-xs text-gray-400 uppercase tracking-wider">Education</span>
+          </div>
+          <h5 className="font-semibold text-white">AltSchool Africa</h5>
+          <p className="text-sm text-blue-400 mt-0.5">Frontend Engineering</p>
+          <p className="text-xs text-gray-500 mt-0.5">March 2025 – March 2026</p>
+          <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+            Graduated with a strong focus on modern frontend development, UI
+            engineering, and production-ready React applications.
+          </p>
+        </BentoCard>
+
+        {/* Sunderland card */}
+        <BentoCard delay={0.25} className="border-purple-500/20 bg-purple-500/[0.03]">
+          <div className="flex items-center gap-2 mb-3">
+            <FaGraduationCap className="text-purple-400" />
+            <span className="text-xs text-gray-400 uppercase tracking-wider">Education</span>
+          </div>
+          <h5 className="font-semibold text-white">University of Sunderland</h5>
+          <p className="text-sm text-purple-400 mt-0.5">MSc Computing</p>
+          <p className="text-xs text-gray-500 mt-0.5">Postgraduate</p>
+          <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+            Deepened understanding of software systems, problem solving, and
+            engineering principles at a broader level.
+          </p>
+        </BentoCard>
+
+        {/* FlashPromote card */}
+        <BentoCard delay={0.3} className="border-green-500/20 bg-green-500/[0.03]">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="flex h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs text-gray-400 uppercase tracking-wider">Currently building</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <FaCode className="text-green-400 mt-0.5 flex-shrink-0" />
+            <div>
+              <h5 className="font-semibold text-white">FlashPromote</h5>
+              <p className="text-sm text-green-400 mt-0.5">Influencer Marketing SaaS</p>
+              <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+                Full stack platform connecting brands with creators. Built with
+                React, TypeScript, Supabase, Stripe, and Resend — covering campaign
+                management, creator marketplaces, and end-to-end payments.
+              </p>
+            </div>
+          </div>
+        </BentoCard>
+
       </div>
     </section>
   );

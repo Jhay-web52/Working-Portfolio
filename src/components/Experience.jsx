@@ -35,10 +35,10 @@ const Experience = (props) => {
         transition={{ duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        <h3 className="text-3xl font-[800] text-textWhite sm:text-5xl">
+        <h3 className="gradient-heading text-3xl font-[800] sm:text-5xl">
           Experience
         </h3>
-        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-textWhite"></div>
+        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent" />
       </motion.div>
       <div className="mt-16 sm:mt-20 flex flex-col items-center justify-between py-6">
         {/* Experience */}

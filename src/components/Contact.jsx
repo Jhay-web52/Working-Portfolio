@@ -1,56 +1,40 @@
 "use client";
 import { useForm, ValidationError } from "@formspree/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { HiMailOpen } from "react-icons/hi";
-import { FaXTwitter } from "react-icons/fa6";
+
+const inputClass =
+  "block w-full rounded-lg border border-white/10 bg-white/[0.05] p-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all duration-200";
 
 const FormspreeContactForm = ({ formId }) => {
   const [show, setShow] = useState(false);
   const [state, handleSubmit] = useForm(formId);
-  const [formData, setFormData] = useState({
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ email: "", subject: "", message: "" });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   useEffect(() => {
     if (state.succeeded) {
       setShow(true);
-      setFormData({
-        email: "",
-        subject: "",
-        message: "",
-      });
+      setFormData({ email: "", subject: "", message: "" });
     }
   }, [state.succeeded]);
 
-  // after form submission greetings
   if (show) {
     return (
-      <div className="mx-auto mt-8 flex max-w-md items-center lg:max-w-lg">
-        <p className="text-md text-textPara">
-          Thank you for reaching out! <br /> I appreciate your interest and
-          will get back to you as soon as possible. In the meantime, feel free
-          to explore more of my portfolio.
-        </p>
-      </div>
+      <p className="text-sm text-gray-300 leading-relaxed">
+        Thank you for reaching out! I&apos;ll get back to you as soon as possible.
+      </p>
     );
   }
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
-      <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="mb-2 block text-sm font-medium text-white"
-        >
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email" className="mb-1.5 block text-xs font-medium text-gray-400 uppercase tracking-wider">
           Your email
         </label>
         <input
@@ -60,16 +44,13 @@ const FormspreeContactForm = ({ formId }) => {
           required
           value={formData.email}
           onChange={handleChange}
-          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
-          placeholder="joeloguntade256@gmail.com"
+          className={inputClass}
+          placeholder="you@example.com"
         />
         <ValidationError prefix="Email" field="email" errors={state.errors} />
       </div>
-      <div className="mb-6">
-        <label
-          htmlFor="subject"
-          className="mb-2 block text-sm font-medium text-white"
-        >
+      <div>
+        <label htmlFor="subject" className="mb-1.5 block text-xs font-medium text-gray-400 uppercase tracking-wider">
           Subject
         </label>
         <input
@@ -79,24 +60,22 @@ const FormspreeContactForm = ({ formId }) => {
           required
           value={formData.subject}
           onChange={handleChange}
-          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
+          className={inputClass}
           placeholder="Just saying hi"
         />
         <ValidationError prefix="Subject" field="subject" errors={state.errors} />
       </div>
-      <div className="mb-6">
-        <label
-          htmlFor="message"
-          className="mb-2 block text-sm font-medium text-white"
-        >
+      <div>
+        <label htmlFor="message" className="mb-1.5 block text-xs font-medium text-gray-400 uppercase tracking-wider">
           Message
         </label>
         <textarea
           name="message"
           id="message"
+          rows={4}
           value={formData.message}
           onChange={handleChange}
-          className="block w-full rounded-lg border border-[#33353F] bg-[#18191E] p-2.5 text-sm text-gray-100 placeholder-[#9CA2A9]"
+          className={inputClass}
           placeholder="Let's talk about..."
         />
         <ValidationError prefix="Message" field="message" errors={state.errors} />
@@ -104,119 +83,111 @@ const FormspreeContactForm = ({ formId }) => {
       <button
         type="submit"
         disabled={state.submitting}
-        className="mr-4 w-full rounded-full border-2 border-white bg-transparent px-5 py-2.5 text-center text-sm font-medium text-white transition-all duration-500 ease-in-out hover:scale-[0.98] hover:bg-darkHover"
+        className="w-full rounded-full border border-blue-500/40 bg-blue-500/10 px-5 py-2.5 text-sm font-medium text-blue-300 transition-all duration-300 hover:bg-blue-500/20 hover:border-blue-400/60 hover:text-white disabled:opacity-50"
       >
-        Send Message
+        {state.submitting ? "Sending…" : "Send Message"}
       </button>
     </form>
   );
 };
 
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/in/joel-oguntade",
+    icon: BsLinkedin,
+    label: "LinkedIn",
+  },
+  {
+    href: "https://github.com/Jhay-web52",
+    icon: BsGithub,
+    label: "GitHub",
+  },
+  {
+    href: "mailto:joeloguntade256@gmail.com",
+    icon: HiMailOpen,
+    label: "Email",
+  },
+];
+
 const Contact = () => {
   const refHeading = useRef(null);
   const inViewHeading = useInView(refHeading);
   const refContent = useRef(null);
-  const inViewContent = useInView(refContent);
+  const inViewContent = useInView(refContent, { once: true });
 
   const formId = process.env.NEXT_PUBLIC_FORM_ID;
-
-  const variants1 = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-  };
 
   return (
     <section className="sm:px-6 sm:pt-[80px]" id="contact">
       <motion.div
         ref={refHeading}
-        variants={variants1}
-        initial="initial"
-        animate={inViewHeading ? "animate" : "initial"}
+        initial={{ opacity: 0, y: 50 }}
+        animate={inViewHeading ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        <h3 className="text-3xl font-[800] text-textWhite sm:text-5xl">
-          Get In Touch
-        </h3>
-        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-textWhite"></div>
+        <h3 className="gradient-heading text-3xl font-[800] sm:text-5xl">Get In Touch</h3>
+        <div className="mt-2 h-[4px] min-w-0 flex-grow bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent" />
       </motion.div>
-      <div className="relative mt-10 flex flex-col items-center gap-4 py-12 md:flex-row md:items-start">
-        <motion.div
-          ref={refContent}
-          initial={{ opacity: 0, y: -50 }}
-          animate={
-            inViewContent ? { opacity: 1, y: 0 } : { opacity: 1, y: -50 }
-          }
-          transition={{ duration: 1 }}
-          className="flex-1"
-        >
-          <h5 className="my-2 text-2xl font-bold text-heading md:text-3xl">
-            Why Be Shy, Say Hi...
-          </h5>
-          <p className="max-w-lg text-base text-textWhite">
-            I&apos;m open to new opportunities and look forward to connecting
-            with you. Whether you have inquiries or just want to say hello, feel
-            free to reach out. <br /> I&apos;ll do my best to respond promptly!
-          </p>
-          <div className="mt-6 flex flex-row gap-5">
-            <a
-              href="https://www.linkedin.com/in/joel-oguntade"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-              target="_blank"
-            >
-              <BsLinkedin className="size-7" />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Linkedin
-              </span>
-            </a>
-            <a
-              href="https://github.com/Jhay-web52"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-              target="_blank"
-            >
-              <BsGithub className="size-7" />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Github
-              </span>
-            </a>
 
-            <a
-              href="mailto:joeloguntade256@gmail.com"
-              target="_blank"
-              className="group relative transition-all duration-500 ease-in-out hover:-translate-y-[2px] "
-            >
-              <HiMailOpen className="size-7 " />
-              <span className="absolute left-[50%] top-[150%] w-fit translate-x-[-50%] translate-y-[-50%] px-2 text-xs text-textLight opacity-0 group-hover:opacity-100">
-                Email
-              </span>
-            </a>
+      <div
+        ref={refContent}
+        className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 py-8"
+      >
+        {/* Left – info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inViewContent ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between gap-6"
+        >
+          <div>
+            <h5 className="text-2xl font-bold text-white md:text-3xl">
+              Why be shy, say hi
+            </h5>
+            <p className="mt-3 text-sm leading-relaxed text-gray-400 max-w-sm">
+              I&apos;m open to new opportunities and look forward to connecting
+              with you. Whether you have a project in mind or just want to say
+              hello, feel free to reach out.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {socialLinks.map(({ href, icon: Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/[0.04] text-sm text-gray-300 hover:border-blue-500/40 hover:bg-blue-500/10 hover:text-white transition-all duration-200"
+              >
+                <Icon className="w-4 h-4" />
+                {label}
+              </a>
+            ))}
           </div>
         </motion.div>
+
+        {/* Right – form */}
         <motion.div
-          ref={refContent}
-          initial={{ opacity: 0, y: -50 }}
-          animate={
-            inViewContent ? { opacity: 1, y: 0 } : { opacity: 1, y: -50 }
-          }
-          transition={{ duration: 1 }}
-          className="mt-10 w-full p-4 md:mt-0 md:w-[40%]"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inViewContent ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 hover:border-blue-500/20 transition-colors duration-300"
         >
           {formId ? (
             <FormspreeContactForm formId={formId} />
           ) : (
-            <div className="mx-auto mt-2 flex max-w-md items-center lg:max-w-lg">
-              <p className="text-md text-textPara">
-                The contact form is not configured right now. You can still
-                reach me via email using the button on the left.
-              </p>
-            </div>
+            <p className="text-sm text-gray-400">
+              The contact form is not configured right now. You can still reach
+              me via email using the button on the left.
+            </p>
           )}
         </motion.div>
       </div>
 
       <footer className="flex items-center text-center pb-6">
-        <span className="mx-auto text-textPara">
-          © {new Date().getFullYear()} - made with ❤️ by Joel Oguntade
+        <span className="mx-auto text-sm text-gray-500">
+          © {new Date().getFullYear()} — made with ❤️ by Joel Oguntade
         </span>
       </footer>
     </section>
