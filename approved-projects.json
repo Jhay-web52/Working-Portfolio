@@ -1,44 +1,42 @@
 [
   {
-    "repoName": "JhayFx",
-    "description": "The technical evolution of JhayFx centered on leveraging HTML to its full potential. I engineered a modular architecture that prioritizes clean code practices and intuitive interaction models.",
-    "demoUrl": "https://jhayfx.vercel.app"
-  },
-  {
-    "repoName": "Markdown-Preview",
-    "description": "With Markdown Preview, I dived deep into the intricacies of Vue development. The project involved solving critical technical hurdles through iterative prototyping and rigorous testing of core functionalities.",
-    "demoUrl": "https://markdown-preview-five.vercel.app"
-  },
-  {
-    "repoName": "CodeFlow-AI",
-    "description": "The technical evolution of CodeFlow AI centered on leveraging JavaScript to its full potential. I engineered a modular architecture that prioritizes clean code practices and intuitive interaction models.",
-    "demoUrl": "https://codeflow-ai-zeta.vercel.app"
-  },
-  {
-    "repoName": "scissors-landing",
-    "description": ""
-  },
-  {
-    "repoName": "sunny-landing",
-    "description": ""
-  },
-  {
-    "repoName": "blog-application",
-    "description": "The development of Blog Application was a technical journey focused on mastering CSS. I architected the solution to handle complex data flows while ensuring performance and scalability remained top priorities.",
-    "demoUrl": "https://blog-application-gamma-seven.vercel.app"
-  },
-  {
-    "repoName": "Blog-Application",
-    "description": "With Blog Application, I dived deep into the intricacies of CSS development. The project involved solving critical technical hurdles through iterative prototyping and rigorous testing of core functionalities."
-  },
-  {
     "repoName": "E-commerce",
-    "description": "Building E Commerce challenged me to push the boundaries of TypeScript. I focused on creating a robust system that integrates modern design patterns with efficient backend logic, resulting in a seamless user experience.",
+    "description": "E-commerce storefront built in TypeScript — browse products by category, manage a live cart, and step through a multi-stage checkout. Type-safe component design keeps the shopping flow reliable from browsing to order confirmation.",
     "demoUrl": "https://ecommercequickserve.vercel.app"
   },
   {
-    "repoName": "__smoke_test__",
-    "description": "test",
-    "demoUrl": ""
+    "repoName": "Bejama-React",
+    "description": "React e-commerce UI with product listing, live cart management, and a checkout flow. Demonstrates practical React patterns — component state, prop drilling, and conditional rendering — in a realistic shopping experience.",
+    "demoUrl": "https://bejama-react.vercel.app"
+  },
+  {
+    "repoName": "CodeFlow-AI",
+    "description": "AI-powered code assistant that takes natural language prompts and returns generated, explained, or debugged code snippets. Built with vanilla JavaScript around an LLM API with a clean split-pane input/output interface.",
+    "demoUrl": "https://codeflow-ai-zeta.vercel.app"
+  },
+  {
+    "repoName": "Markdown-Preview",
+    "description": "Live markdown editor built with Vue.js and TypeScript — write on the left, see a fully rendered preview on the right in real time. Supports headings, code blocks, lists, links, and inline formatting.",
+    "demoUrl": "https://markdown-preview-five.vercel.app"
+  },
+  {
+    "repoName": "CinaVault",
+    "description": "Movie discovery app powered by the TMDB API — browse trending films, search by title, and view ratings and cast details. Built with vanilla JavaScript with live API calls and dynamic DOM rendering.",
+    "demoUrl": "https://movie-list-mauve-pi.vercel.app"
+  },
+  {
+    "repoName": "Blog-Application",
+    "description": "Blog platform built with Vue.js — readers can browse and filter posts by category with a clean reading layout. Uses Vue Router for page navigation and reactive computed properties for instant filtering without reloads.",
+    "demoUrl": "https://blog-application-gamma-seven.vercel.app"
+  },
+  {
+    "repoName": "JhayFx",
+    "description": "Landing page for JhayFx, a trading education brand — showcases course tiers, signal service plans, and a community CTA. Built with HTML, CSS, and TypeScript with a conversion-focused layout and smooth scroll interactions.",
+    "demoUrl": "https://jhayfx.vercel.app"
+  },
+  {
+    "repoName": "chuks-kitchen",
+    "description": "Freelance client project — a restaurant website with an interactive menu, gallery, and contact form. Built mobile-first with HTML, CSS, and JavaScript, featuring smooth scroll behaviour and a clean food-brand aesthetic.",
+    "demoUrl": "https://chuks-blond.vercel.app"
   }
 ]
