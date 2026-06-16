@@ -189,7 +189,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  className="absolute left-0 z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:left-auto sm:right-0"
+                  className="z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:absolute sm:left-auto sm:right-0"
                 >
                   {certificates.map((cert) => (
                     <a
