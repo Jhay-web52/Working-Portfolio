@@ -70,7 +70,7 @@ const About = () => {
         <BentoCard delay={0.15} className="flex flex-col justify-between gap-4">
           <p className="text-xs text-gray-400 uppercase tracking-wider">At a glance</p>
           {[
-            { value: "2+", label: "Years experience" },
+            { value: "1+", label: "Years experience" },
             { value: "9+", label: "Projects shipped" },
             { value: "3", label: "Companies" },
           ].map(({ value, label }) => (
