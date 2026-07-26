@@ -133,7 +133,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { action, repoName, description, demoUrl } = body;
+    const { action, repoName, description, demoUrl, featured } = body;
 
     if (!action || !repoName) {
       return Response.json(
@@ -165,11 +165,16 @@ export async function POST(request) {
           approvedList[existingIndex].demoUrl = demoUrl;
           updated = true;
         }
+        if (typeof featured === "boolean") {
+          approvedList[existingIndex].featured = featured;
+          updated = true;
+        }
       } else {
-        approvedList.push({ 
-          repoName, 
-          description: description || "", 
-          demoUrl: demoUrl || "" 
+        approvedList.push({
+          repoName,
+          description: description || "",
+          demoUrl: demoUrl || "",
+          ...(typeof featured === "boolean" ? { featured } : {}),
         });
         updated = true;
       }

@@ -108,6 +108,7 @@ async function fetchGitHubProjects(limit, approvedItems) {
     const customDesc = typeof approvedEntry === 'object' ? approvedEntry.description : null;
     const customDemo = typeof approvedEntry === 'object' ? approvedEntry.demoUrl : null;
     const demoUrl = pickDemoUrl(customDemo, repo.homepage);
+    const featuredOverride = typeof approvedEntry === 'object' ? approvedEntry.featured : undefined;
 
     const allLanguages = Object.keys(languagesResults[i]);
     const tech = allLanguages.length > 0 ? allLanguages : (repo.language ? [repo.language] : ["JavaScript"]);
@@ -129,7 +130,7 @@ async function fetchGitHubProjects(limit, approvedItems) {
       category: repo.topics?.length > 0 ? repo.topics[0] : "Development",
       source: repo.html_url,
       demo: demoUrl,
-      featured: repo.stargazers_count > 5,
+      featured: typeof featuredOverride === "boolean" ? featuredOverride : repo.stargazers_count > 5,
       year: new Date(repo.created_at).getFullYear(),
       source_type: "GitHub",
     };
@@ -160,6 +161,10 @@ export async function GET(request) {
     const filteredProjects = includeUnapproved
       ? projectsWithApproval
       : projectsWithApproval.filter((p) => p.approved);
+
+    // Surface featured projects first so they land in the initial "load more" page
+    // instead of depending on GitHub's updated-at ordering alone.
+    filteredProjects.sort((a, b) => (b.featured === a.featured ? 0 : b.featured ? 1 : -1));
 
     const publicStats = {
       approvedProjects: filteredProjects.length,

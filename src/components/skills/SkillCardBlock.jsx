@@ -36,10 +36,12 @@ import {
   SupabaseOriginal,
   VercelOriginal,
   ViteOriginal,
+  FramermotionOriginal,
 } from "devicons-react";
 import { FaGithub } from "react-icons/fa";
-import { SiShadcnui, SiStripe } from "react-icons/si";
-import { TbApi } from "react-icons/tb";
+import { SiShadcnui, SiStripe, SiZod, SiReacthookform, SiResend } from "react-icons/si";
+import { TbApi, TbCreditCard } from "react-icons/tb";
+import { GiBearHead } from "react-icons/gi";
 import { motion } from "framer-motion";
 import skill from "@/assets/skill.png";
 import Image from "next/image";
@@ -197,6 +199,29 @@ const SkillCardBlock = ({ icon, name }) => {
       break;
     case "RestApi":
       IconComponent = TbApi;
+      break;
+    case "FramermotionOriginal":
+      IconComponent = FramermotionOriginal;
+      break;
+    case "Zod":
+      IconComponent = SiZod;
+      break;
+    case "ReactHookForm":
+      IconComponent = SiReacthookform;
+      break;
+    case "Resend":
+      IconComponent = SiResend;
+      break;
+    case "Zustand":
+      // No official Zustand devicon/simple-icon exists; the project's own
+      // branding is a bear, so this generic bear icon stands in for it —
+      // same fallback approach as "RestApi" -> TbApi above.
+      IconComponent = GiBearHead;
+      break;
+    case "Paystack":
+      // No Paystack brand icon in devicons-react or react-icons; a generic
+      // payment icon stands in, same fallback approach as "RestApi" -> TbApi.
+      IconComponent = TbCreditCard;
       break;
     default:
       break;

@@ -113,12 +113,12 @@ export default function HeroSection() {
               Joel Oguntade
             </span>
             <br />
-            Full Stack Developer
+            Frontend Developer
           </h1>
 
           <TypeAnimation
             sequence={[
-              "Building full stack apps with React & Next.js",
+              "Building interfaces with React & Next.js",
               1200,
               "Crafting smooth, scalable web experiences",
               1200,
@@ -131,9 +131,10 @@ export default function HeroSection() {
           />
 
           <p className="mx-auto mt-4 max-w-xl text-textPara lg:mx-0">
-            I build modern, high-performance web applications with React, Next.js, and
-            Node.js. With a strong focus on clean code, responsive design, and
-            exceptional user experience end-to-end.
+            I build modern, high-performance web applications with React and Next.js,
+            with full stack range across Node.js when a project calls for it. With a
+            strong focus on clean code, responsive design, and exceptional user
+            experience end-to-end.
           </p>
 
           {/* ===== CTA BUTTONS ===== */}

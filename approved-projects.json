@@ -38,5 +38,11 @@
     "repoName": "chuks-kitchen",
     "description": "Freelance client project — a restaurant website with an interactive menu, gallery, and contact form. Built mobile-first with HTML, CSS, and JavaScript, featuring smooth scroll behaviour and a clean food-brand aesthetic.",
     "demoUrl": "https://chuks-blond.vercel.app"
+  },
+  {
+    "repoName": "flashpromote1",
+    "description": "Full stack influencer-marketing SaaS with dual-role dashboards for brands and influencers. Stripe handles payments, Resend sends transactional email, and Supabase powers auth, storage, and real-time data — Joel's flagship project.",
+    "demoUrl": "https://flashpromote1.vercel.app",
+    "featured": true
   }
 ]

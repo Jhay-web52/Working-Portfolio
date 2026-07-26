@@ -20,14 +20,14 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata = {
   metadataBase: new URL("https://joeloguntade.vercel.app"),
   title: {
-    default: "Joel Oguntade | Full Stack Developer",
+    default: "Joel Oguntade | Frontend Developer",
     template: "%s | Joel Oguntade",
   },
   description:
-    "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
+    "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
   keywords: [
     "Joel Oguntade",
-    "Full Stack Developer",
+    "Frontend Developer",
     "React Developer",
     "Next.js Developer",
     "TypeScript",
@@ -50,24 +50,24 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://joeloguntade.vercel.app",
-    title: "Joel Oguntade | Full Stack Developer",
+    title: "Joel Oguntade | Frontend Developer",
     description:
-      "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase. Building fast, accessible, and production-ready web applications.",
+      "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase. Building fast, accessible, and production-ready web applications.",
     siteName: "Joel Oguntade Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Joel Oguntade — Full Stack Developer",
+        alt: "Joel Oguntade — Frontend Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Joel Oguntade | Full Stack Developer",
+    title: "Joel Oguntade | Frontend Developer",
     description:
-      "Full Stack Developer specialising in React, Next.js, TypeScript, and Supabase.",
+      "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase.",
     images: ["/og-image.png"],
   },
 };

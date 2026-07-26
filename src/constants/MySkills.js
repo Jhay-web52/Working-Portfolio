@@ -52,13 +52,37 @@ export const MySkills = [
         name: "Vite",
         icon: "ViteOriginal",
       },
+      {
+        name: "MUI",
+        icon: "MaterialuiOriginal",
+      },
+      {
+        name: "Framer Motion",
+        icon: "FramermotionOriginal",
+      },
+      {
+        name: "Zustand",
+        icon: "Zustand",
+      },
+      {
+        name: "Zod",
+        icon: "Zod",
+      },
+      {
+        name: "React Hook Form",
+        icon: "ReactHookForm",
+      },
     ],
     index: 2,
   },
 
   {
-    title: "Databases & Backend",
+    title: "Backend & Databases",
     skills: [
+      {
+        name: "Node.js",
+        icon: "NodejsOriginal",
+      },
       {
         name: "MySQL",
         icon: "MysqlOriginal",
@@ -93,6 +117,14 @@ export const MySkills = [
       {
         name: "Stripe",
         icon: "StripeOriginal",
+      },
+      {
+        name: "Resend",
+        icon: "Resend",
+      },
+      {
+        name: "Paystack",
+        icon: "Paystack",
       },
       {
         name: "Figma",
