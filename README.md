@@ -1,6 +1,6 @@
 # 🚀 Joel Oguntade — Portfolio
 
-My personal portfolio site: a fast, animated, full stack Next.js app that showcases who I am, what I've built, and how to reach me. The project section isn't static data — it talks to the GitHub API live, and I run a small password-protected admin panel behind it to curate what shows up.
+My personal portfolio site: a fast, animated Next.js app that showcases who I am, what I've built, and how to reach me. The project section isn't static data — it talks to the GitHub API live, and I run a small password-protected admin panel behind it to curate what shows up.
 
 🔗 **Live Demo:** https://joeloguntade.vercel.app
 
@@ -8,7 +8,7 @@ My personal portfolio site: a fast, animated, full stack Next.js app that showca
 
 ## 📌 Overview
 
-This is more than a static landing page. Under the hood it's a working full stack app:
+This is more than a static landing page. Under the hood it has its own backend layer:
 
 - The **project showcase pulls directly from the GitHub API** for my account at request time — no hardcoded project list to keep in sync.
 - An **approvals layer**, backed by **Vercel KV / Upstash Redis** in production, decides which of my repos are shown and lets me attach a custom description or live demo link per project without touching code.
@@ -54,7 +54,7 @@ This is more than a static landing page. Under the hood it's a working full stac
 - Tailwind CSS, MUI, Framer Motion
 - Mobile-first, cross-browser design
 
-### Full Stack / Backend
+### Backend / API Layer
 - Next.js API routes (`src/app/api/*`)
 - GitHub REST API integration with auth-token support for private repos
 - Vercel KV / Upstash Redis for persistent server-side state

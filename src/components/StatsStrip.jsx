@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 
 const stats = [
   { target: 2, label: "Years Experience", suffix: "+" },
-  { target: 10, label: "Projects Built", suffix: "+" },
+  { target: 9, label: "Projects Built", suffix: "" },
   { target: 3, label: "Companies", suffix: "" },
-  { target: 5, label: "Technologies", suffix: "+" },
+  { target: 20, label: "Technologies", suffix: "+" },
 ];
 
 function CountUp({ target, suffix, trigger }) {

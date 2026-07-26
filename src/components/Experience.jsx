@@ -4,17 +4,6 @@ import { motion, useInView } from "framer-motion";
 import ExperienceWrapper from "./experience/ExperienceWrapper";
 
 
-// Experience --->work flow
-//  └── ExperienceWrapper
-//       ├── CompaniesBar
-//       │     └── setDescriptionJob("ADDigitech")
-//       │
-//       └── AnimatePresence
-//             └── motion.div (key = job name)
-//                   └── ADDigitech / LnvDigitalExperience
-
-
-
 const Experience = (props) => {
   const refHeading = useRef(null);
   const refContent = useRef(null);

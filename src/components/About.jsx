@@ -71,7 +71,7 @@ const About = () => {
           <p className="text-xs text-gray-400 uppercase tracking-wider">At a glance</p>
           {[
             { value: "2+", label: "Years experience" },
-            { value: "10+", label: "Projects shipped" },
+            { value: "9+", label: "Projects shipped" },
             { value: "3", label: "Companies" },
           ].map(({ value, label }) => (
             <div key={label} className="flex items-baseline gap-2">
@@ -123,8 +123,8 @@ const About = () => {
               <h5 className="font-semibold text-white">FlashPromote</h5>
               <p className="text-sm text-green-400 mt-0.5">Influencer Marketing SaaS</p>
               <p className="text-xs text-gray-400 mt-2 leading-relaxed">
-                Full stack platform connecting brands with creators. Built with
-                React, TypeScript, Supabase, Stripe, and Resend — covering campaign
+                A platform connecting brands with creators. Built with React,
+                TypeScript, Supabase, Stripe, and Resend — covering campaign
                 management, creator marketplaces, and end-to-end payments.
               </p>
             </div>

@@ -31,7 +31,6 @@ export const metadata = {
     "React Developer",
     "Next.js Developer",
     "TypeScript",
-    "Supabase",
     "Frontend Engineer",
     "Web Developer UK",
     "Portfolio",
