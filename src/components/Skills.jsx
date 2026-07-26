@@ -8,7 +8,7 @@ const TABS = [
   { id: "all", label: "All" },
   { id: "Programming Languages", label: "Languages" },
   { id: "Frameworks & Libraries", label: "Frameworks" },
-  { id: "Databases & Backend", label: "Databases" },
+  { id: "Backend & Databases", label: "Databases" },
   { id: "Tools & Deployment", label: "Tools" },
 ];
 
