@@ -24,7 +24,7 @@ export const metadata = {
     template: "%s | Joel Oguntade",
   },
   description:
-    "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
+    "Frontend Developer specialising in React, Next.js, and TypeScript. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
   keywords: [
     "Joel Oguntade",
     "Frontend Developer",
@@ -52,7 +52,7 @@ export const metadata = {
     url: "https://joeloguntade.vercel.app",
     title: "Joel Oguntade | Frontend Developer",
     description:
-      "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase. Building fast, accessible, and production-ready web applications.",
+      "Frontend Developer specialising in React, Next.js, and TypeScript. Building fast, accessible, and production-ready web applications.",
     siteName: "Joel Oguntade Portfolio",
     images: [
       {
@@ -67,7 +67,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Joel Oguntade | Frontend Developer",
     description:
-      "Frontend Developer specialising in React, Next.js, and TypeScript, with full stack range across Supabase.",
+      "Frontend Developer specialising in React, Next.js, and TypeScript.",
     images: ["/og-image.png"],
   },
 };

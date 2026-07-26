@@ -131,9 +131,8 @@ export default function HeroSection() {
           />
 
           <p className="mx-auto mt-4 max-w-xl text-textPara lg:mx-0">
-            I build modern, high-performance web applications with React and Next.js,
-            with full stack range across Node.js when a project calls for it. With a
-            strong focus on clean code, responsive design, and exceptional user
+            I build modern, high-performance web applications with React and Next.js.
+            With a strong focus on clean code, responsive design, and exceptional user
             experience end-to-end.
           </p>
 

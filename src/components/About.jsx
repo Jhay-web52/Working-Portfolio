@@ -55,8 +55,8 @@ const About = () => {
               <h4 className="text-lg font-bold text-white">Joel Oguntade</h4>
               <p className="text-sm text-blue-400 mb-2">Frontend Developer</p>
               <p className="text-sm leading-relaxed text-gray-300">
-                I build production-ready interfaces, with full stack range from the UI
-                down to the database when a project calls for it. My journey began at{" "}
+                I build production-ready interfaces with a strong focus on performance,
+                accessibility, and design fidelity. My journey began at{" "}
                 <span className="font-medium text-gray-100">AltSchool Africa</span>{" "}
                 where I graduated as a Frontend Engineer, then deepened my academic
                 background studying Computing at the{" "}
