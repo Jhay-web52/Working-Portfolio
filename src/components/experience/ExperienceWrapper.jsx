@@ -19,19 +19,6 @@ const experiences = [
     tech: "React.js, Tailwind CSS, JavaScript, HTML5, CSS3, Figma",
   },
   {
-    company: "AltSchool Africa",
-    role: "Frontend Engineer",
-    date: "March 2025 – March 2026",
-    color: "purple",
-    tasks: [
-      "Developed responsive and interactive web applications using React.js and modern JavaScript frameworks.",
-      "Collaborated with backend developers to integrate APIs and ensure seamless frontend-backend communication.",
-      "Implemented state management solutions and optimized component performance for better user experience.",
-      "Participated in code reviews and best practices discussions to maintain code quality and scalability.",
-    ],
-    tech: "React.js, Next.js, JavaScript, Tailwind CSS, TypeScript, REST APIs",
-  },
-  {
     company: "Jhayfx Trading Academy",
     role: "Web Developer",
     badge: "Remote",
