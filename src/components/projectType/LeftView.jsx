@@ -82,20 +82,11 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
         </div>
       </motion.div>
       {/* project image */}
-      <motion.div
-        ref={refContent}
-        initial={{ opacity: 0, filter: "blur(6px)" }}// blur(6px), opacity: 0 
-        animate={
-          inViewContent
-            ? { opacity: 1, filter: "blur(0px)" }  
-            : { opacity: 1, filter: "blur(6px) " } // Scrolls into view  , blur(0px), opacity: 1  
-        }
-        transition={{ duration: 1 }}
-        className="order-1 col-span-12 lg:col-span-5 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] xl:order-2 xl:self-start xl:justify-self-end mt-4 lg:mt-0"
-      >
+      <div className="order-1 col-span-12 lg:col-span-5 flex justify-end transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] xl:order-2 xl:self-start xl:justify-self-end mt-4 lg:mt-0">
         <a
-          href={demo}
+          href={demo || source}
           target="_blank"
+          rel="noreferrer"
           className="relative group block w-full aspect-video lg:w-[420px] lg:h-[260px] overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50"
         >
           {img && (
@@ -107,10 +98,12 @@ const LeftView = ({ id, name, description, img, tech, source, demo }) => {
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-            <span className="text-white text-xs font-bold uppercase tracking-widest">View Live Site</span>
+            <span className="text-white text-xs font-bold uppercase tracking-widest">
+              {demo ? "View Live Site" : "View Source"}
+            </span>
           </div>
         </a>
-      </motion.div>
+      </div>
     </div>
   );
 };

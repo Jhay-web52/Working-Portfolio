@@ -12,20 +12,11 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
 
   return (
     <div className="mt-[80px] grid grid-cols-1 md:px-10 lg:mt-[120px] xl:grid-cols-12">
-      <motion.div
-        ref={refContent}
-        initial={{ opacity: 0, filter: "blur(6px) brightness(50%)" }}
-        animate={
-          inViewContent
-            ? { opacity: 1, filter: "blur(0px) brightness(100%)" }
-            : { opacity: 1, filter: "blur(6px) brightness(50%)" }
-        }
-        transition={{ duration: 1 }}
-        className="col-span-12 lg:col-span-5 w-full brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] hover:brightness-100 flex justify-start"
-      >
+      <div className="col-span-12 lg:col-span-5 w-full brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] hover:brightness-100 flex justify-start">
         <a
-          href={demo}
+          href={demo || source}
           target="_blank"
+          rel="noreferrer"
           className="relative group block w-full aspect-video lg:w-[420px] lg:h-[260px] overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50"
         >
           {img && (
@@ -37,10 +28,12 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-            <span className="text-white text-xs font-bold uppercase tracking-widest">View Live Site</span>
+            <span className="text-white text-xs font-bold uppercase tracking-widest">
+              {demo ? "View Live Site" : "View Source"}
+            </span>
           </div>
         </a>
-      </motion.div>
+      </div>
       <motion.div
         ref={refContent}
         initial={{ opacity: 0, x: 50 }}
