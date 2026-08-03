@@ -128,7 +128,7 @@ async function fetchGitHubProjects(limit, approvedItems) {
       img: getProjectImage(repo.name, demoUrl, repo.full_name),
       tech,
       category: repo.topics?.length > 0 ? repo.topics[0] : "Development",
-      source: repo.html_url,
+      source: repo.private ? null : repo.html_url,
       demo: demoUrl,
       featured: typeof featuredOverride === "boolean" ? featuredOverride : repo.stargazers_count > 5,
       year: new Date(repo.created_at).getFullYear(),
