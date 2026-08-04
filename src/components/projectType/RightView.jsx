@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { ArrowRight } from "@mui/icons-material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LaunchIcon from "@mui/icons-material/Launch";
@@ -12,23 +11,23 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
 
   return (
     <div className="mt-[80px] grid grid-cols-1 md:px-10 lg:mt-[120px] xl:grid-cols-12">
-      <div className="col-span-12 lg:col-span-5 w-full brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] hover:brightness-100 flex justify-start">
+      <div className="col-span-12 flex w-full justify-start brightness-50 transition-all duration-700 ease-in-out hover:z-20 hover:scale-[1.02] hover:brightness-100 lg:col-span-5">
         <a
           href={demo || source}
           target="_blank"
           rel="noreferrer"
-          className="relative group block w-full aspect-video lg:w-[420px] lg:h-[260px] overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50"
+          className="group relative block aspect-video w-full overflow-hidden rounded-xl border border-white/10 shadow-2xl shadow-black/50 lg:h-[260px] lg:w-[420px]"
         >
           {img && (
             <Image
               fill
               src={img}
               alt={name}
-              className="object-cover group-hover:scale-110 transition-transform duration-700"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-            <span className="text-white text-xs font-bold uppercase tracking-widest">
+          <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            <span className="text-xs font-bold tracking-widest text-white uppercase">
               {demo ? "View Live Site" : "View Source"}
             </span>
           </div>
@@ -45,7 +44,7 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
         transition={{
           duration: 0.5,
         }}
-        className="relative col-span-12 lg:col-span-7 flex w-full flex-col items-end mt-4 lg:mt-0"
+        className="relative col-span-12 mt-4 flex w-full flex-col items-end lg:col-span-7 lg:mt-0"
       >
         {/* project tagline */}
         <div
@@ -54,21 +53,27 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
           <h3 className="text-heading font-bold">{name}</h3>
         </div>
         {/* description absolute */}
-        <div className="group right-0 top-[40px] z-10 mt-1 w-full rounded-lg bg-bgDark shadow-xl shadow-black/20 p-4 border border-white/5 lg:absolute lg:w-[450px]">
+        <div className="group bg-bgDark top-[40px] right-0 z-10 mt-1 w-full rounded-lg border border-white/5 p-4 shadow-xl shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/15 lg:absolute lg:w-[450px]">
           {description?.map((item, i) => (
-            <div key={i} className="flex items-start gap-1 sm:gap-2 mb-2 last:mb-0">
-              <ArrowRight className={" h-5 w-4 flex-none text-[#31d1d1]"} />
-              <div className="text-sm text-textWhite leading-relaxed">
+            <div
+              key={i}
+              className="mb-2 flex items-start gap-1 last:mb-0 sm:gap-2"
+            >
+              <ArrowRight className={"h-5 w-4 flex-none text-[#31d1d1]"} />
+              <div className="text-textWhite text-sm leading-relaxed">
                 <p>{item}</p>
               </div>
             </div>
           ))}
         </div>
         {/* tech stack */}
-        <div className="mt-4 flex flex-wrap items-center justify-end gap-2 text-xs text-heading font-medium md:gap-3 md:text-sm lg:mt-[180px] ">
+        <div className="text-heading mt-4 flex flex-wrap items-center justify-end gap-2 text-xs font-medium md:gap-3 md:text-sm lg:mt-[180px]">
           {tech?.map((item, i) => {
             return (
-              <span key={i} className="px-2 py-1 bg-white/5 rounded-md border border-white/10 uppercase tracking-wider text-[10px]">
+              <span
+                key={i}
+                className="rounded-md border border-white/10 bg-white/5 px-2 py-1 font-mono text-[10px] tracking-wider uppercase transition-colors duration-200 hover:border-[#31d1d1]/40 hover:bg-[#31d1d1]/10 hover:text-[#31d1d1]"
+              >
                 {item}
               </span>
             );
@@ -81,10 +86,10 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
               href={source}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex cursor-pointer items-center gap-1 text-textLight hover:text-white transition-colors"
+              className="group text-textLight relative flex cursor-pointer items-center gap-1 transition-colors hover:text-white"
             >
               <GitHubIcon className="animate-pulse group-hover:animate-none" />
-              <span className="absolute -left-[135%] top-7 w-[90px] whitespace-nowrap px-2 text-[10px] bg-bgDark border border-white/10 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="bg-bgDark absolute top-7 -left-[135%] w-[90px] rounded border border-white/10 px-2 py-1 text-[10px] whitespace-nowrap opacity-0 transition-opacity group-hover:opacity-100">
                 Source Code
               </span>
             </a>
@@ -94,10 +99,10 @@ const RightView = ({ id, name, description, img, tech, source, demo }) => {
               href={demo}
               target="_blank"
               rel="noreferrer"
-              className="group relative flex cursor-pointer items-center gap-2 text-[#31d1d1] hover:text-[#31d1d1]/80 transition-colors"
+              className="group relative flex cursor-pointer items-center gap-2 text-[#31d1d1] transition-colors hover:text-[#31d1d1]/80"
             >
               <LaunchIcon className="animate-pulse group-hover:animate-none" />
-              <span className="absolute -left-[60%] top-7 w-fit px-2 text-[10px] bg-bgDark border border-[#31d1d1]/20 rounded py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="bg-bgDark absolute top-7 -left-[60%] w-fit rounded border border-[#31d1d1]/20 px-2 py-1 text-[10px] opacity-0 transition-opacity group-hover:opacity-100">
                 Live Demo
               </span>
             </a>

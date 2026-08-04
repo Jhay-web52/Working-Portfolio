@@ -7,12 +7,12 @@ import { useRef, useState, useEffect } from "react";
 
 const Projects = () => {
   const refHeading = useRef(null);
-  const inViewHeading = useInView(refHeading);
+  const inViewHeading = useInView(refHeading, { once: true, amount: 0.3 });
   const [projects, setProjects] = useState([]);
   const [displayedProjects, setDisplayedProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [projectsPerPage] = useState(6);
+  const projectsPerPage = 6;
 
   const variants1 = {
     initial: { opacity: 0, y: 50 },
@@ -75,9 +75,9 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="py-10 text-center text-textLight"
+          className="text-textLight py-10 text-center"
         >
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-textLight/30 border-t-textWhite"></div>
+          <div className="border-textLight/30 border-t-textWhite inline-block h-8 w-8 animate-spin rounded-full border-4"></div>
           <p className="mt-4">Loading projects...</p>
         </motion.div>
       )}
@@ -87,14 +87,17 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="rounded-lg border-2 border-red-500/50 bg-red-500/10 py-4 px-4 text-center text-red-400"
+          className="rounded-lg border-2 border-red-500/50 bg-red-500/10 px-4 py-4 text-center text-red-400"
         >
           {error}
         </motion.div>
       )}
 
       {/* Projects Grid */}
-      {!loading && !error && displayedProjects && displayedProjects.length > 0 ? (
+      {!loading &&
+      !error &&
+      displayedProjects &&
+      displayedProjects.length > 0 ? (
         <>
           {displayedProjects.map((project, i) => {
             return i % 2 === 0 ? (
@@ -110,14 +113,16 @@ const Projects = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex justify-center mt-12"
+              className="mt-12 flex justify-center"
             >
               <button
                 onClick={handleLoadMore}
-                className="group relative px-8 py-3 bg-transparent text-textWhite font-bold rounded-lg overflow-hidden border border-textWhite/30 hover:border-[#31d1d1] transition-all duration-300 transform hover:scale-105"
+                className="group text-textWhite border-textWhite/30 relative transform overflow-hidden rounded-lg border bg-transparent px-8 py-3 font-bold transition-all duration-300 hover:scale-105 hover:border-[#31d1d1]"
               >
-                <span className="relative z-10">not impressed enough, show more</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#31d1d1]/20 to-[#6d28d9]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">
+                  not impressed enough, show more
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#31d1d1]/20 to-[#6d28d9]/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </button>
             </motion.div>
           )}
@@ -126,7 +131,7 @@ const Projects = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="py-10 text-center text-textLight"
+          className="text-textLight py-10 text-center"
         >
           No projects found.
         </motion.div>
@@ -176,4 +181,3 @@ export default Projects;
 // │ Projects visually with    │
 // │ alternating Left/Right    │
 // └───────────────────────────┘
-

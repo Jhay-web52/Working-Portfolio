@@ -1,5 +1,3 @@
-"use client";
-
 import PageReveal from "@/components/PageReveal";
 
 import Navbar from "@/components/Navbar";
@@ -14,7 +12,7 @@ import StatsStrip from "@/components/StatsStrip";
 export default function Home() {
   return (
     <PageReveal>
-      <div className="relative mx-auto max-w-screen-xl bg-bgDark text-textWhite">
+      <div className="bg-bgDark text-textWhite relative mx-auto max-w-screen-xl">
         <Navbar />
         <main className="overflow-hidden px-3 md:px-4">
           <HeroSection />

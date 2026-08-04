@@ -14,17 +14,17 @@ const TABS = [
 
 const Skills = () => {
   const refHeading = useRef(null);
-  const inViewHeading = useInView(refHeading);
+  const inViewHeading = useInView(refHeading, { once: true, amount: 0.3 });
   const [activeTab, setActiveTab] = useState("all");
 
   const allSkills = MySkills.flatMap((c) => c.skills);
   const filteredSkills =
     activeTab === "all"
       ? allSkills
-      : MySkills.find((c) => c.title === activeTab)?.skills ?? [];
+      : (MySkills.find((c) => c.title === activeTab)?.skills ?? []);
 
   return (
-    <section className="sm:py-[80px] sm:px-6" id="skills">
+    <section className="sm:px-6 sm:py-[80px]" id="skills">
       <motion.div
         ref={refHeading}
         initial={{ opacity: 0, y: 50 }}
@@ -32,7 +32,9 @@ const Skills = () => {
         transition={{ duration: 0.6 }}
         className="flex items-center gap-4"
       >
-        <h3 className="gradient-heading text-3xl font-[800] sm:text-5xl">Skills</h3>
+        <h3 className="gradient-heading text-3xl font-[800] sm:text-5xl">
+          Skills
+        </h3>
         <div className="mt-2 h-[4px] min-w-0 flex-grow bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent" />
       </motion.div>
 
@@ -42,7 +44,7 @@ const Skills = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative px-4 py-1.5 rounded-full text-sm font-medium transition-colors duration-200 ${
+            className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
               activeTab === tab.id
                 ? "text-white"
                 : "text-gray-400 hover:text-gray-200"
@@ -51,7 +53,7 @@ const Skills = () => {
             {activeTab === tab.id && (
               <motion.span
                 layoutId="skill-tab-pill"
-                className="absolute inset-0 rounded-full bg-blue-600/25 border border-blue-500/40"
+                className="absolute inset-0 rounded-full border border-blue-500/40 bg-blue-600/25"
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
@@ -68,7 +70,7 @@ const Skills = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.2 }}
-          className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
+          className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
         >
           {filteredSkills.map((skill, i) => (
             <motion.div

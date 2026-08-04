@@ -6,7 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import picture from "@/assets/IMG_2099.jpeg";
-import { FaDownload, FaArrowRight, FaCertificate, FaChevronDown, FaFileAlt } from "react-icons/fa";
+import {
+  FaDownload,
+  FaCertificate,
+  FaChevronDown,
+  FaFileAlt,
+} from "react-icons/fa";
 
 /* Floating animation (desktop only) */
 const floating = {
@@ -30,7 +35,10 @@ export default function HeroSection() {
   const certificates = [
     { label: "AltSchool Africa Certificate", file: "/certificate.pdf" },
     { label: "AltSchool Africa Transcript", file: "/transcript.pdf" },
-    { label: "Trueminds Innovations Certificate", file: "/trueminds-certificate.pdf" },
+    {
+      label: "Trueminds Innovations Certificate",
+      file: "/trueminds-certificate.pdf",
+    },
   ];
 
   useEffect(() => {
@@ -57,36 +65,8 @@ export default function HeroSection() {
   return (
     <section
       id="intro"
-      className="relative min-h-screen overflow-hidden px-4 pt-24 sm:px-6"
+      className="relative z-0 min-h-screen overflow-hidden px-4 pt-24 sm:px-6"
     >
-      {/* ===== Animated Gradient Background ===== */}
-      <motion.div
-        className="absolute inset-0 -z-30"
-        animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        style={{
-          background:
-            "linear-gradient(120deg, rgba(59,130,246,0.14), rgba(147,51,234,0.14), rgba(59,130,246,0.14))",
-          backgroundSize: "300% 300%",
-        }}
-      />
-
-      {/* ===== GRID OVERLAY (VISIBLE) ===== */}
-      <div
-        className="absolute inset-0 z-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-          maskImage:
-            "radial-gradient(circle at center, black 0%, black 45%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at center, black 0%, black 45%, transparent 75%)",
-        }}
-      />
-
       {/* ===== Mouse Glow ===== */}
       {isDesktop && (
         <motion.div
@@ -108,7 +88,7 @@ export default function HeroSection() {
           className="flex-1 text-center lg:text-left"
         >
           <h1 className="mb-4 text-3xl font-extrabold text-white sm:text-4xl xl:text-6xl">
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="text-heading drop-shadow-[0_0_25px_rgba(59,130,246,0.9)]">
               Joel Oguntade
             </span>
@@ -127,12 +107,13 @@ export default function HeroSection() {
             ]}
             speed={45}
             repeat={Infinity}
-            className="text-sm text-textPara sm:text-lg"
+            className="text-textPara text-sm sm:text-lg"
           />
 
-          <p className="mx-auto mt-4 max-w-xl text-textPara lg:mx-0">
-            I build modern, high-performance web applications with React and Next.js,
-            with a strong focus on clean code, responsive design, and accessibility.
+          <p className="text-textPara mx-auto mt-4 max-w-xl lg:mx-0">
+            I build modern, high-performance web applications with React and
+            Next.js, with a strong focus on clean code, responsive design, and
+            accessibility.
           </p>
 
           {/* ===== CTA BUTTONS ===== */}
@@ -150,10 +131,9 @@ export default function HeroSection() {
               <motion.div
                 whileHover={{ scale: 1.06, y: -3 }}
                 whileTap={{ scale: 0.95 }}
-                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-8 py-3 font-bold text-darkHover shadow-xl sm:w-auto"
+                className="text-darkHover inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-8 py-3 font-bold shadow-xl sm:w-auto"
               >
                 View Projects
-                <FaArrowRight className="transition-transform group-hover:translate-x-1" />
               </motion.div>
             </ScrollLink>
 
@@ -180,7 +160,9 @@ export default function HeroSection() {
               >
                 <FaCertificate />
                 View Certificates
-                <FaChevronDown className={`transition-transform duration-200 ${certOpen ? "rotate-180" : ""}`} />
+                <FaChevronDown
+                  className={`transition-transform duration-200 ${certOpen ? "rotate-180" : ""}`}
+                />
               </motion.button>
 
               {certOpen && (
@@ -188,7 +170,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  className="z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:absolute sm:left-auto sm:right-0"
+                  className="z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:absolute sm:right-0 sm:left-auto"
                 >
                   {certificates.map((cert) => (
                     <a
@@ -230,29 +212,45 @@ export default function HeroSection() {
               <>
                 <motion.span
                   animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-3 -left-12 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -top-3 -left-12 rounded-full border border-blue-500/30 bg-blue-500/15 px-3 py-1 text-[11px] font-semibold text-blue-300 backdrop-blur-sm"
                 >
                   React.js
                 </motion.span>
                 <motion.span
                   animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-6 -right-8 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -top-6 -right-8 rounded-full border border-blue-500/30 bg-blue-500/15 px-3 py-1 text-[11px] font-semibold text-blue-300 backdrop-blur-sm"
                 >
                   Next.js
                 </motion.span>
                 <motion.span
                   animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-2 -left-10 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -bottom-2 -left-10 rounded-full border border-blue-500/30 bg-blue-500/15 px-3 py-1 text-[11px] font-semibold text-blue-300 backdrop-blur-sm"
                 >
                   Vue.js
                 </motion.span>
                 <motion.span
                   animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -bottom-4 right-0 text-[11px] font-semibold px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 backdrop-blur-sm"
+                  transition={{
+                    duration: 3.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute right-0 -bottom-4 rounded-full border border-blue-500/30 bg-blue-500/15 px-3 py-1 text-[11px] font-semibold text-blue-300 backdrop-blur-sm"
                 >
                   TypeScript
                 </motion.span>

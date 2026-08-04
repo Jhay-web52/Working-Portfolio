@@ -3,15 +3,14 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import ExperienceWrapper from "./experience/ExperienceWrapper";
 
-
 const Experience = (props) => {
   const refHeading = useRef(null);
   const refContent = useRef(null);
-  const inViewHeading = useInView(refHeading);//watches when that element enters the viewport
+  const inViewHeading = useInView(refHeading, { once: true, amount: 0.3 }); //watches when that element enters the viewport
   const inViewContent = useInView(refContent, { once: true });
   const variants1 = {
-    initial: { opacity: 0, y: 50 },//Heading starts below + invisible
-    animate: { opacity: 1, y: 0 },//When scrolled into view → slides up + fades in
+    initial: { opacity: 0, y: 50 }, //Heading starts below + invisible
+    animate: { opacity: 1, y: 0 }, //When scrolled into view → slides up + fades in
   };
 
   return (
@@ -29,7 +28,7 @@ const Experience = (props) => {
         </h3>
         <div className="mt-2 h-[4px] min-w-0 flex-grow bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent" />
       </motion.div>
-      <div className="mt-16 sm:mt-20 flex flex-col items-center justify-between py-6">
+      <div className="mt-16 flex flex-col items-center justify-between py-6 sm:mt-20">
         {/* Experience */}
         <ExperienceWrapper />
       </div>

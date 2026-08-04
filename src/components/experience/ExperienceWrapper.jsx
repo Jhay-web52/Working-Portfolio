@@ -62,40 +62,51 @@ const TimelineEntry = ({ experience, index }) => {
       initial={{ opacity: 0, x: -24 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative pl-8 pb-10 last:pb-0"
+      className="relative pb-10 pl-8 last:pb-0"
     >
       {/* Glowing dot */}
       <span
-        className={`absolute left-0 top-2 w-3 h-3 rounded-full -translate-x-[6px] ${dotStyle[experience.color]}`}
+        className={`absolute top-2 left-0 h-3 w-3 -translate-x-[6px] rounded-full ${dotStyle[experience.color]}`}
       />
 
       {/* Card */}
-      <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors duration-300 hover:border-white/20">
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
+      <motion.div
+        whileHover={{ y: -4, scale: 1.01 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-colors duration-300 hover:border-white/20"
+      >
+        <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
           <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h4 className="font-bold text-white text-lg">{experience.company}</h4>
+            <div className="flex flex-wrap items-center gap-2">
+              <h4 className="text-lg font-bold text-white">
+                {experience.company}
+              </h4>
               {experience.badge && (
                 <span
-                  className={`text-xs px-2 py-0.5 rounded-full border ${badgeStyle[experience.color]}`}
+                  className={`rounded-full border px-2 py-0.5 text-xs ${badgeStyle[experience.color]}`}
                 >
                   {experience.badge}
                 </span>
               )}
             </div>
-            <p className={`text-sm font-medium mt-0.5 ${roleStyle[experience.color]}`}>
+            <p
+              className={`mt-0.5 text-sm font-medium ${roleStyle[experience.color]}`}
+            >
               {experience.role}
             </p>
           </div>
-          <span className="text-xs text-gray-400 font-mono whitespace-nowrap pt-1">
+          <span className="pt-1 font-mono text-xs whitespace-nowrap text-gray-400">
             {experience.date}
           </span>
         </div>
 
-        <ul className="space-y-1.5 mb-3">
+        <ul className="mb-3 space-y-1.5">
           {experience.tasks.map((task, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-gray-300">
-              <ArrowRight className="h-4 w-4 flex-none text-gray-500 mt-0.5" />
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm text-gray-300"
+            >
+              <ArrowRight className="mt-0.5 h-4 w-4 flex-none text-gray-500" />
               <span>{task}</span>
             </li>
           ))}
@@ -105,16 +116,16 @@ const TimelineEntry = ({ experience, index }) => {
           <span className="font-medium text-gray-300">Stack: </span>
           {experience.tech}
         </p>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
 
 const ExperienceWrapper = () => {
   return (
-    <div className="relative w-full mt-8 px-4 md:px-0">
+    <div className="relative mt-8 w-full px-4 md:px-0">
       {/* Vertical connecting line */}
-      <div className="absolute left-4 md:left-0 top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-teal-500/20" />
+      <div className="absolute top-2 bottom-2 left-4 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-teal-500/20 md:left-0" />
 
       {experiences.map((exp, i) => (
         <TimelineEntry key={exp.company} experience={exp} index={i} />
