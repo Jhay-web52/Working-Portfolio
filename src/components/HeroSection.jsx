@@ -1,11 +1,23 @@
 "use client";
 
 import { TypeAnimation } from "react-type-animation";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import Image from "next/image";
 import picture from "@/assets/IMG_2099.jpeg";
+
+// Three.js is heavy, so the globe is loaded only on the client and only on desktop.
+const HeroGlobe = dynamic(() => import("./hero/HeroGlobe"), { ssr: false });
 import {
   FaDownload,
   FaCertificate,
@@ -21,7 +33,19 @@ const floating = {
 
 export default function HeroSection() {
   const ref = useRef(null);
+  const sectionRef = useRef(null);
   const inView = useInView(ref, { once: true });
+
+  /* Scroll-linked motion: text drifts up and fades, the globe turns and grows */
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const globeY = useTransform(scrollYProgress, [0, 1], [0, 180]);
+  const globeScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
 
   /* Mouse glow */
   const mouseX = useMotionValue(0);
@@ -65,6 +89,7 @@ export default function HeroSection() {
   return (
     <section
       id="intro"
+      ref={sectionRef}
       className="relative z-0 min-h-screen overflow-hidden px-4 pt-24 sm:px-6"
     >
       {/* ===== Mouse Glow ===== */}
@@ -78,117 +103,132 @@ export default function HeroSection() {
         />
       )}
 
-      <div className="relative z-20 mx-auto flex max-w-7xl flex-col-reverse items-center gap-12 lg:flex-row">
-        {/* ===== LEFT CONTENT ===== */}
+      {/* ===== GLOBE BACKDROP (desktop only) ===== */}
+      {isDesktop && !reduceMotion && (
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="flex-1 text-center lg:text-left"
+          style={{ y: globeY, scale: globeScale }}
+          className="pointer-events-none absolute top-24 right-[-18%] z-10 h-[min(85vh,760px)] w-[min(85vh,760px)] opacity-80 xl:right-[-6%]"
         >
-          <h1 className="mb-4 text-3xl font-extrabold text-white sm:text-4xl xl:text-6xl">
-            Hi, I&apos;m{" "}
-            <span className="text-heading drop-shadow-[0_0_25px_rgba(59,130,246,0.9)]">
-              Joel Oguntade
-            </span>
-            <br />
-            Full-Stack Developer
-          </h1>
+          <HeroGlobe progress={scrollYProgress} />
+        </motion.div>
+      )}
 
-          <TypeAnimation
-            sequence={[
-              "Building interfaces with React & Next.js",
-              1200,
-              "Crafting smooth, scalable web experiences",
-              1200,
-              "Turning ideas into production-ready code",
-              1200,
-            ]}
-            speed={45}
-            repeat={Infinity}
-            className="text-textPara text-sm sm:text-lg"
-          />
+      <div className="relative z-20 mx-auto flex max-w-7xl flex-col-reverse items-center gap-12 lg:flex-row">
+        {/* ===== LEFT CONTENT (fades and drifts on scroll) ===== */}
+        <motion.div
+          style={reduceMotion ? undefined : { y: textY, opacity: textOpacity }}
+          className="w-full flex-1"
+        >
+          <motion.div
+            ref={ref}
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="flex-1 text-center lg:text-left"
+          >
+            <h1 className="mb-4 text-3xl font-extrabold text-white sm:text-4xl xl:text-6xl">
+              Hi, I&apos;m{" "}
+              <span className="text-heading drop-shadow-[0_0_25px_rgba(59,130,246,0.9)]">
+                Joel Oguntade
+              </span>
+              <br />
+              Full-Stack Developer
+            </h1>
 
-          <p className="text-textPara mx-auto mt-4 max-w-xl lg:mx-0">
-            I build production web and mobile apps in TypeScript, React,
-            Next.js, and Node.js, from Figma handoff through to deployment.
-            Currently leading development on ClariFi NG.
-          </p>
+            <TypeAnimation
+              sequence={[
+                "Building interfaces with React & Next.js",
+                1200,
+                "Crafting smooth, scalable web experiences",
+                1200,
+                "Turning ideas into production-ready code",
+                1200,
+              ]}
+              speed={45}
+              repeat={Infinity}
+              className="text-textPara text-sm sm:text-lg"
+            />
 
-          {/* ===== CTA BUTTONS ===== */}
-          <div className="mt-8 flex w-full flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
-            {/* View Projects */}
-            <ScrollLink
-              to="projects"
-              smooth
-              spy
-              offset={-80}
-              duration={800}
-              role="button"
-              className="cursor-pointer"
-            >
-              <motion.div
-                whileHover={{ scale: 1.06, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-darkHover inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-8 py-3 font-bold shadow-xl sm:w-auto"
+            <p className="text-textPara mx-auto mt-4 max-w-xl lg:mx-0">
+              I build production web and mobile apps in TypeScript, React,
+              Next.js, and Node.js, from Figma handoff through to deployment.
+              Currently leading development on ClariFi NG.
+            </p>
+
+            {/* ===== CTA BUTTONS ===== */}
+            <div className="mt-8 flex w-full flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              {/* View Projects */}
+              <ScrollLink
+                to="projects"
+                smooth
+                spy
+                offset={-80}
+                duration={800}
+                role="button"
+                className="cursor-pointer"
               >
-                View Projects
-              </motion.div>
-            </ScrollLink>
-
-            {/* Download CV */}
-            <motion.a
-              href="/Joel_Oguntade_CV.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.06, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-white px-8 py-3 font-medium text-white sm:w-auto"
-            >
-              Download CV
-              <FaDownload />
-            </motion.a>
-
-            {/* View Certificates Dropdown */}
-            <div className="relative w-full sm:w-auto">
-              <motion.button
-                whileHover={{ scale: 1.06, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setCertOpen((v) => !v)}
-                className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-blue-400 px-8 py-3 font-medium text-blue-400 sm:w-auto"
-              >
-                <FaCertificate />
-                View Certificates
-                <FaChevronDown
-                  className={`transition-transform duration-200 ${certOpen ? "rotate-180" : ""}`}
-                />
-              </motion.button>
-
-              {certOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:absolute sm:right-0 sm:left-auto"
+                  whileHover={{ scale: 1.06, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-darkHover inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-8 py-3 font-bold shadow-xl sm:w-auto"
                 >
-                  {certificates.map((cert) => (
-                    <a
-                      key={cert.file}
-                      href={cert.file}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setCertOpen(false)}
-                      className="flex items-center gap-3 px-5 py-3 text-sm text-gray-300 transition-colors first:rounded-t-xl last:rounded-b-xl hover:bg-blue-500/10 hover:text-blue-400"
-                    >
-                      <FaFileAlt className="flex-none text-blue-400" />
-                      {cert.label}
-                    </a>
-                  ))}
+                  View Projects
                 </motion.div>
-              )}
+              </ScrollLink>
+
+              {/* Download CV */}
+              <motion.a
+                href="/Joel_Oguntade_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.06, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-white px-8 py-3 font-medium text-white sm:w-auto"
+              >
+                Download CV
+                <FaDownload />
+              </motion.a>
+
+              {/* View Certificates Dropdown */}
+              <div className="relative w-full sm:w-auto">
+                <motion.button
+                  whileHover={{ scale: 1.06, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setCertOpen((v) => !v)}
+                  className="inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full border-2 border-blue-400 px-8 py-3 font-medium text-blue-400 sm:w-auto"
+                >
+                  <FaCertificate />
+                  View Certificates
+                  <FaChevronDown
+                    className={`transition-transform duration-200 ${certOpen ? "rotate-180" : ""}`}
+                  />
+                </motion.button>
+
+                {certOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="z-50 mt-2 w-full min-w-[280px] rounded-xl border border-white/10 bg-[#1a1a2e] shadow-xl sm:absolute sm:right-0 sm:left-auto"
+                  >
+                    {certificates.map((cert) => (
+                      <a
+                        key={cert.file}
+                        href={cert.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setCertOpen(false)}
+                        className="flex items-center gap-3 px-5 py-3 text-sm text-gray-300 transition-colors first:rounded-t-xl last:rounded-b-xl hover:bg-blue-500/10 hover:text-blue-400"
+                      >
+                        <FaFileAlt className="flex-none text-blue-400" />
+                        {cert.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* ===== IMAGE ===== */}

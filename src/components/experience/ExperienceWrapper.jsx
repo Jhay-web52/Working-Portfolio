@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll } from "framer-motion";
 import { ArrowRight } from "@mui/icons-material";
 
 const experiences = [
@@ -133,10 +133,22 @@ const TimelineEntry = ({ experience, index }) => {
 };
 
 const ExperienceWrapper = () => {
+  const timelineRef = useRef(null);
+  // The bright line fills in as the timeline scrolls through the viewport
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 60%"],
+  });
+
   return (
-    <div className="relative mt-8 w-full px-4 md:px-0">
-      {/* Vertical connecting line */}
+    <div ref={timelineRef} className="relative mt-8 w-full px-4 md:px-0">
+      {/* Vertical connecting line (faint track) */}
       <div className="absolute top-2 bottom-2 left-4 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-teal-500/20 md:left-0" />
+      {/* Scroll-drawn progress */}
+      <motion.div
+        style={{ scaleY: scrollYProgress, originY: 0 }}
+        className="absolute top-2 bottom-2 left-4 w-px bg-gradient-to-b from-blue-400 via-purple-400 to-teal-400 shadow-[0_0_10px_rgba(96,165,250,0.8)] md:left-0"
+      />
 
       {experiences.map((exp, i) => (
         <TimelineEntry key={exp.company} experience={exp} index={i} />
