@@ -1,7 +1,7 @@
 [
   {
     "repoName": "E-commerce",
-    "description": "E-commerce storefront built in TypeScript — browse products by category, manage a live cart, and step through a multi-stage checkout. Type-safe component design keeps the shopping flow reliable from browsing to order confirmation.",
+    "description": "Storefront with cart and checkout processing live Paystack payments. Zustand handles cart state, React Query handles product data, and Zod with React Hook Form handles validation. Unit tested with Vitest.",
     "demoUrl": "https://ecommercequickserve.vercel.app"
   },
   {
@@ -40,8 +40,17 @@
     "demoUrl": "https://chuks-blond.vercel.app"
   },
   {
+    "repoName": "OrbitTrack",
+    "description": "Real-time satellite tracker with a live 3D globe plotting six satellites' positions, visible-pass predictions for the user's location, and dynamic Open Graph share images per satellite. The N2YO API is proxied through server-side Next.js routes so the key never reaches the client.",
+    "demoUrl": "https://orbit-track.vercel.app"
+  },
+  {
+    "repoName": "OrbitTrack-Mobile",
+    "description": "React Native companion app for OrbitTrack, built with Expo and Expo Router. It reuses the web app's API, schedules local notifications before each visible pass, and refreshes in the background with duplicate-safe scheduling."
+  },
+  {
     "repoName": "flashpromote1",
-    "description": "Influencer-marketing SaaS with dual-role dashboards for brands and influencers, built in React/Next.js and integrating Stripe for payments, Resend for transactional email, and Supabase for auth, storage, and real-time data — Joel's flagship project.",
+    "description": "Influencer-marketing SaaS with a two-sided marketplace and role-based dashboards: brands create campaigns and browse creators, while creators manage applications, pricing plans, and workspaces. Integrates Stripe payments and Resend transactional email, with Supabase for auth, storage, and a real-time PostgreSQL database.",
     "demoUrl": "https://flashpromote1.vercel.app",
     "featured": true
   }

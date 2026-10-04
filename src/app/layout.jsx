@@ -20,14 +20,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://joeloguntade.vercel.app"),
   title: {
-    default: "Joel Oguntade | Frontend Developer",
+    default: "Joel Oguntade | Full-Stack Developer",
     template: "%s | Joel Oguntade",
   },
   description:
-    "Frontend Developer specialising in React, Next.js, and TypeScript. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
+    "Full-Stack Developer specialising in TypeScript, React, Next.js, and Node.js. Building fast, accessible, and production-ready web applications. Based in Sunderland, UK.",
   keywords: [
     "Joel Oguntade",
-    "Frontend Developer",
+    "Full-Stack Developer",
     "React Developer",
     "Next.js Developer",
     "TypeScript",
@@ -49,24 +49,24 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: "https://joeloguntade.vercel.app",
-    title: "Joel Oguntade | Frontend Developer",
+    title: "Joel Oguntade | Full-Stack Developer",
     description:
-      "Frontend Developer specialising in React, Next.js, and TypeScript. Building fast, accessible, and production-ready web applications.",
+      "Full-Stack Developer specialising in TypeScript, React, Next.js, and Node.js. Building fast, accessible, and production-ready web applications.",
     siteName: "Joel Oguntade Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Joel Oguntade — Frontend Developer",
+        alt: "Joel Oguntade — Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Joel Oguntade | Frontend Developer",
+    title: "Joel Oguntade | Full-Stack Developer",
     description:
-      "Frontend Developer specialising in React, Next.js, and TypeScript.",
+      "Full-Stack Developer specialising in TypeScript, React, Next.js, and Node.js.",
     images: ["/og-image.png"],
   },
 };

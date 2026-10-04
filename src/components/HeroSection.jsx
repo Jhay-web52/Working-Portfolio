@@ -93,7 +93,7 @@ export default function HeroSection() {
               Joel Oguntade
             </span>
             <br />
-            Frontend Developer
+            Full-Stack Developer
           </h1>
 
           <TypeAnimation
@@ -111,9 +111,9 @@ export default function HeroSection() {
           />
 
           <p className="text-textPara mx-auto mt-4 max-w-xl lg:mx-0">
-            I build modern, high-performance web applications with React and
-            Next.js, with a strong focus on clean code, responsive design, and
-            accessibility.
+            I build production web and mobile apps in TypeScript, React,
+            Next.js, and Node.js, from Figma handoff through to deployment.
+            Currently leading development on ClariFi NG.
           </p>
 
           {/* ===== CTA BUTTONS ===== */}

@@ -54,16 +54,15 @@ const About = () => {
             />
             <div>
               <h4 className="text-lg font-bold text-white">Joel Oguntade</h4>
-              <p className="mb-2 text-sm text-blue-400">Frontend Developer</p>
+              <p className="mb-2 text-sm text-blue-400">Full-Stack Developer</p>
               <p className="text-sm leading-relaxed text-gray-300">
-                I build production-ready interfaces with a strong focus on
-                performance, accessibility, and design fidelity. My journey
-                began at{" "}
+                I build production web and mobile apps across the stack, with
+                a focus on performance, clean architecture, and shipping
+                reliably. I trained as a Frontend Engineer at{" "}
                 <span className="font-medium text-gray-100">
                   AltSchool Africa
                 </span>{" "}
-                where I graduated as a Frontend Engineer, then deepened my
-                academic background studying Computing at the{" "}
+                and am now completing an MSc in Computing at the{" "}
                 <span className="font-medium text-gray-100">
                   University of Sunderland
                 </span>
@@ -102,13 +101,13 @@ const About = () => {
             </span>
           </div>
           <h5 className="font-semibold text-white">AltSchool Africa</h5>
-          <p className="mt-0.5 text-sm text-blue-400">Frontend Engineering</p>
-          <p className="mt-0.5 text-xs text-gray-500">
-            March 2025 – March 2026
+          <p className="mt-0.5 text-sm text-blue-400">
+            Certificate in Frontend Engineering
           </p>
+          <p className="mt-0.5 text-xs text-gray-500">March 2026</p>
           <p className="mt-2 text-xs leading-relaxed text-gray-400">
-            Graduated with a strong focus on modern frontend development, UI
-            engineering, and production-ready React applications.
+            Focused on modern frontend development, UI engineering, and
+            production-ready React applications.
           </p>
         </BentoCard>
 
@@ -125,10 +124,9 @@ const About = () => {
           </div>
           <h5 className="font-semibold text-white">University of Sunderland</h5>
           <p className="mt-0.5 text-sm text-purple-400">MSc Computing</p>
-          <p className="mt-0.5 text-xs text-gray-500">Postgraduate</p>
+          <p className="mt-0.5 text-xs text-gray-500">Expected 2027</p>
           <p className="mt-2 text-xs leading-relaxed text-gray-400">
-            Deepened understanding of software systems, problem solving, and
-            engineering principles at a broader level.
+            Dissertation: AI-based detection of CV and resume fraud.
           </p>
         </BentoCard>
 
@@ -146,14 +144,12 @@ const About = () => {
           <div className="flex items-start gap-2">
             <FaCode className="mt-0.5 flex-shrink-0 text-green-400" />
             <div>
-              <h5 className="font-semibold text-white">FlashPromote</h5>
-              <p className="mt-0.5 text-sm text-green-400">
-                Influencer Marketing SaaS
-              </p>
+              <h5 className="font-semibold text-white">ClariFi NG</h5>
+              <p className="mt-0.5 text-sm text-green-400">Lead Developer</p>
               <p className="mt-2 text-xs leading-relaxed text-gray-400">
-                A platform connecting brands with creators. Built with React,
-                TypeScript, Supabase, Stripe, and Resend — covering campaign
-                management, creator marketplaces, and end-to-end payments.
+                Leading a team building a financial health and decision-support
+                platform for micro and small businesses, on Supabase with a
+                modular monolith architecture.
               </p>
             </div>
           </div>

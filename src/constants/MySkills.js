@@ -3,24 +3,24 @@ export const MySkills = [
     title: "Programming Languages",
     skills: [
       {
-        name: "JavaScript",
-        icon: "JavascriptOriginal",
-      },
-      {
         name: "TypeScript",
         icon: "TypescriptOriginal",
       },
       {
-        name: "HTML",
+        name: "JavaScript",
+        icon: "JavascriptOriginal",
+      },
+      {
+        name: "SQL",
+        icon: "SqldeveloperOriginal",
+      },
+      {
+        name: "HTML5",
         icon: "Html5Original",
       },
       {
-        name: "CSS",
+        name: "CSS3",
         icon: "Css3Original",
-      },
-      {
-        name: "PHP",
-        icon: "PhpOriginal",
       },
     ],
     index: 1,
@@ -41,36 +41,32 @@ export const MySkills = [
         icon: "VueOriginal",
       },
       {
-        name: "Nuxt.js",
-        icon: "NuxtOriginal",
+        name: "React Native (Expo)",
+        icon: "ReactNative",
       },
       {
         name: "Tailwind CSS",
         icon: "TailwindcssOriginal",
       },
       {
-        name: "Vite",
-        icon: "ViteOriginal",
-      },
-      {
-        name: "MUI",
-        icon: "MaterialuiOriginal",
-      },
-      {
-        name: "Framer Motion",
-        icon: "FramermotionOriginal",
+        name: "Three.js (React Three Fiber)",
+        icon: "ThreeJs",
       },
       {
         name: "Zustand",
         icon: "Zustand",
       },
       {
-        name: "Zod",
-        icon: "Zod",
+        name: "React Query",
+        icon: "ReactQuery",
       },
       {
         name: "React Hook Form",
         icon: "ReactHookForm",
+      },
+      {
+        name: "Zod",
+        icon: "Zod",
       },
     ],
     index: 2,
@@ -84,16 +80,20 @@ export const MySkills = [
         icon: "NodejsOriginal",
       },
       {
-        name: "MySQL",
-        icon: "MysqlOriginal",
+        name: "REST APIs",
+        icon: "RestApi",
+      },
+      {
+        name: "Supabase",
+        icon: "SupabaseOriginal",
       },
       {
         name: "PostgreSQL",
         icon: "PostgresqlOriginal",
       },
       {
-        name: "Supabase",
-        icon: "SupabaseOriginal",
+        name: "Redis",
+        icon: "Redis",
       },
     ],
     index: 3,
@@ -107,7 +107,7 @@ export const MySkills = [
         icon: "GitOriginal",
       },
       {
-        name: "Github",
+        name: "GitHub",
         icon: "GithubOriginal",
       },
       {
@@ -115,28 +115,32 @@ export const MySkills = [
         icon: "VercelOriginal",
       },
       {
-        name: "Stripe",
-        icon: "StripeOriginal",
+        name: "Vitest",
+        icon: "Vitest",
       },
       {
-        name: "Resend",
-        icon: "Resend",
+        name: "Stripe",
+        icon: "StripeOriginal",
       },
       {
         name: "Paystack",
         icon: "Paystack",
       },
       {
+        name: "Resend",
+        icon: "Resend",
+      },
+      {
         name: "Figma",
         icon: "FigmaOriginal",
       },
       {
-        name: "Postman",
-        icon: "PostmanOriginal",
+        name: "Claude Code",
+        icon: "ClaudeCode",
       },
       {
-        name: "REST API",
-        icon: "RestApi",
+        name: "GitHub Copilot",
+        icon: "GithubCopilot",
       },
     ],
     index: 4,
